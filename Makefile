@@ -1,6 +1,19 @@
+
+#QTRVSIM=1
+
+ifneq ($(QTRVSIM),)
+SOURCES += sys-qtrvsim/qtrvsim_sys_stub.c sys-qtrvsim/crt0local.S
+LDLIBS += -lc -lgcc -lc -lm
+CC = riscv64-unknown-elf-gcc
+CXX = riscv64-unknown-elf-g++
+CPPFLAGS = -I . -DQTRVSIM=1
+ARCHFLAGS += -mabi=ilp32 -march=rv32im -fno-lto -nostartfiles -nostdlib -static -ggdb
+CFLAGS = $(ARCHFLAGS)
+CXXFLAGS = $(ARCHFLAGS)
+LDFLAGS += $(ARCHFLAGS)
+else
 CC = arm-linux-gnueabihf-gcc
 CXX = arm-linux-gnueabihf-g++
-
 CPPFLAGS = -I .
 CFLAGS =-g -std=gnu99 -O1 -Wall
 CXXFLAGS = -g -std=gnu++11 -O1 -Wall
@@ -8,9 +21,11 @@ CXXFLAGS = -g -std=gnu++11 -O1 -Wall
 LDFLAGS += -static
 LDLIBS += -lrt -lpthread
 #LDLIBS += -lm
+SOURCES += mzapo_phys.c mzapo_parlcd.c serialize_lock.c
+endif
 
-SOURCES = change_me.c mzapo_phys.c mzapo_parlcd.c serialize_lock.c
-#SOURCES += font_prop14x16.c font_rom8x16.c
+SOURCES += change_me.c
+SOURCES += font_prop14x16.c font_rom8x16.c
 TARGET_EXE = change_me
 #TARGET_IP ?= 192.168.202.127
 ifeq ($(TARGET_IP),)

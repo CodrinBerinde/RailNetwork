@@ -30,6 +30,7 @@ TARGET_USER ?= root
 
 OBJECTS += $(filter %.o,$(SOURCES:%.c=%.o))
 OBJECTS += $(filter %.o,$(SOURCES:%.cpp=%.o))
+OBJECTS += $(filter %.o,$(SOURCES:%.S=%.o))
 
 #$(warning OBJECTS=$(OBJECTS))
 
@@ -46,6 +47,9 @@ endif
 
 %.o:%.cpp
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $@ -c $<
+
+%.o:%.S
+	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 
 all: $(TARGET_EXE)
 

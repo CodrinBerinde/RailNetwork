@@ -22,8 +22,7 @@
 #include "serialize_lock.h"
 #include "mzapo_parlcd.h"
 
-void *spiled_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE , 0);
-unsigned char *parlcd_base = map_phys_address(PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE , 0);
+
 
 uint16_t buf0_data[PARLCD_WIDTH * PARLCD_HEIGHT];
 
@@ -34,8 +33,11 @@ buf_t buf = {
 };
 
 int play_game() {
+  void *spiled_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE , 0);
+  unsigned char *parlcd_base = map_phys_address(PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE , 0);
+
   fb_draw_empty_board(&buf);
-  fb_draw(&buf, LCD_FB_START);
+  fb_draw(&buf, parlcd_base);
   while(1) {
     sleep(1);
   }

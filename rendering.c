@@ -40,15 +40,12 @@ void init_rendering_constants() {
 
 void fb_draw()
 {
-  uint16_t* p = buf->data;
-#ifndef QTRVSIM
+  uint16_t* p = buf.data;
+
   parlcd_write_cmd(parlcd_base, 0x2c);
 
-  for (int i = 0; i < buf->height * buf->width; i++)
+  for (int i = 0; i < buf.height * buf.width; i++)
     parlcd_write_data(parlcd_base, *(p++));
-#else
-  memcpy(parlcd_base, fb->data, fb->height * fb->width * 2);
-#endif
 }
 
 void fb_clear(int color) {
@@ -71,12 +68,12 @@ void fb_line(int dir, int x, int y1, int y2, uint16_t color) {
   if(dir == 0) { //the line is horizontal
     if(x < PARLCD_HEIGHT && y1 < PARLCD_WIDTH && y2 < PARLCD_WIDTH) {
       for(int i = x * PARLCD_WIDTH + y1; i <= x * PARLCD_WIDTH + y2; i++)
-        buf->data[i] = color;
+        buf.data[i] = color;
     }
   } else { //the line is vertical
     if(x < PARLCD_WIDTH && y1 < PARLCD_HEIGHT && y2 < PARLCD_HEIGHT) {
       for(int i = y1 * PARLCD_WIDTH + x; i <= y2 * PARLCD_WIDTH + x; i += PARLCD_WIDTH)
-        buf->data[i] = color;
+        buf.data[i] = color;
     }
   }
 }

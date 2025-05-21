@@ -33,7 +33,7 @@ buf_t buf = {
   .data = buf0_data,
 };
 
-int play() {
+int play_game() {
   fb_draw_empty_board(buf);
   fb_draw(buf, LCD_FB_START);
   while(1) {

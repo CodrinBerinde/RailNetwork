@@ -27,6 +27,6 @@ typedef struct BOARD {
 } board_t;
 
 //returns 0 if the game is won, nonzero value otherwise
-int play();
+int play_game();
 
 #endif

@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
   }
 #endif
 
-  printf("Hello world\n");
+  printf("Hello worldd\n");
 
 #ifndef QTRVSIM
   void *spiled_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE , 0);

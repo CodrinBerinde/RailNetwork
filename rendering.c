@@ -83,13 +83,13 @@ void draw(board_t *board, buf_t *buf) {
   //first we draw the horizontal lines
   for(int i = 0; i <= BOARD_HEIGHT; i++) {
     //fb_line(0, UB + i * (CH + BW), LB, 100, BORDER_COLOR);
-    fb_line(0, UB + i * (CH + BW), LB, LB + BOARD_WIDTH * (CW + BW), BORDER_COLOR);
+    fb_line(buf, 0, UB + i * (CH + BW), LB, LB + BOARD_WIDTH * (CW + BW), BORDER_COLOR);
   }
   //fb_line(0, 0, 0, PARLCD_WIDTH - 1, BORDER_COLOR);
 
   //then we draw the vertical lines
   for(int i = 0; i <= BOARD_WIDTH; i++) {
-    fb_line(1, LB + i * (CW + BW), UB, UB + BOARD_HEIGHT * (CH + BW), BORDER_COLOR);
+    fb_line(buf, 1, LB + i * (CW + BW), UB, UB + BOARD_HEIGHT * (CH + BW), BORDER_COLOR);
   }
 
   put_buffer(buf);

@@ -18,6 +18,7 @@
 #include "mzapo_regs.h"
 #include "serialize_lock.h"
 #include "mzapo_parlcd.h"
+#include "play.h"
 
 void fb_draw(buf_t *fb, unsigned char *parlcd_base)
 {

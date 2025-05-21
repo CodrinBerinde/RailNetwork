@@ -22,9 +22,6 @@
 #include <unistd.h>
 #include <string.h>
 
-#define BOARD_HEIGHT 18 // 18 rows of cells
-#define BOARD_WIDTH 28 // 12 columns of cells
-
 #include "mzapo_phys.h"
 #include "mzapo_regs.h"
 #include "serialize_lock.h"

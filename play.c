@@ -34,8 +34,8 @@ buf_t buf = {
 };
 
 int play_game() {
-  fb_draw_empty_board(buf);
-  fb_draw(buf, LCD_FB_START);
+  fb_draw_empty_board(&buf);
+  fb_draw(&buf, LCD_FB_START);
   while(1) {
     sleep(1);
   }

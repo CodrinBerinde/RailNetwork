@@ -17,9 +17,15 @@
 #define BOARD_HEIGHT 18 // 18 rows of cells
 #define BOARD_WIDTH 28 // 12 columns of cells
 
-uint8_t board[BOARD_HEIGHT * BOARD WIDTH];
+typedef struct BOARD {
+  uint8_t *b;
+} board_t;
+
+uint16_t board_data[BOARD_HEIGHT][BOARD_WIDTH];
+
+board_t board = {.b = board_data};
 
 //returns 0 if the game is won, nonzero value otherwise
-uint8_t play();
+int play();
 
 #endif

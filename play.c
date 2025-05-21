@@ -18,6 +18,6 @@
 #include "rendering.h"
 #include "generator.h"
 
-uint8_t play() {
+int play() {
   
 }

@@ -21,6 +21,6 @@
 //  4 - move up
 //  5 - click cell
 //  6 - exit game
-uint8_t listen_event();
+int listen_event();
 
 #endif

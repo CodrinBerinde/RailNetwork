@@ -15,6 +15,6 @@
 
 #include "events.h"
 
-uint8_t listen_event() {
+int listen_event() {
 
 }

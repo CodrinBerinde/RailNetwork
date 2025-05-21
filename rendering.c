@@ -24,8 +24,6 @@
 
 void *spiled_base;
 unsigned char *parlcd_base;
-uint16_t buf0_data[PARLCD_WIDTH * PARLCD_HEIGHT];
-buf_t buf;
 
 void init_rendering_constants() {
   spiled_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE , 0);
@@ -33,10 +31,10 @@ void init_rendering_constants() {
 }
 
 buf_t *init_buffer() {
-  uint16_t buf_data = (uint16_t *)malloc(PARLCD_WIDTH * PARLCD_HEIGHT * 2);
+  uint16_t *buf_data = (uint16_t *)malloc(PARLCD_WIDTH * PARLCD_HEIGHT * 2);
   buf_t *buf = (buf_t *)malloc(sizeof(buf));
-  *(buf->width) = PARLCD_WIDTH;
-  *(buf->height) = PARLCD_HEIGHT;
+  buf->width = PARLCD_WIDTH;
+  buf->height = PARLCD_HEIGHT;
   buf->data = buf_data;
   return buf;
 }
@@ -67,16 +65,16 @@ int fb_char(int x0, int y0, font_descriptor_t *font, int size, int color, char c
 
 }
 
-void fb_line(int dir, int x, int y1, int y2, uint16_t color) {
+void fb_line(buf_t *buf, int dir, int x, int y1, int y2, uint16_t color) {
   if(dir == 0) { //the line is horizontal
     if(x < PARLCD_HEIGHT && y1 < PARLCD_WIDTH && y2 < PARLCD_WIDTH) {
       for(int i = x * PARLCD_WIDTH + y1; i <= x * PARLCD_WIDTH + y2; i++)
-        buf.data[i] = color;
+        buf->data[i] = color;
     }
   } else { //the line is vertical
     if(x < PARLCD_WIDTH && y1 < PARLCD_HEIGHT && y2 < PARLCD_HEIGHT) {
       for(int i = y1 * PARLCD_WIDTH + x; i <= y2 * PARLCD_WIDTH + x; i += PARLCD_WIDTH)
-        buf.data[i] = color;
+        buf->data[i] = color;
     }
   }
 }

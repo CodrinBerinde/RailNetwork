@@ -51,7 +51,7 @@ void fb_rectangle(int x0, int y0, int x1, int y1, int color);
 
 int fb_char(int x0, int y0, font_descriptor_t *font, int size, int color, char ch);
 
-void fb_line(int dir, int x, int y1, int y2, uint16_t color);
+void fb_line(buf_t *buf, int dir, int x, int y1, int y2, uint16_t color);
 
 void draw(board_t *board, buf_t *buf);
 

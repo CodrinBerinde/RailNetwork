@@ -21,10 +21,6 @@ typedef struct BOARD {
   uint16_t *b;
 } board_t;
 
-uint16_t board_data[BOARD_HEIGHT][BOARD_WIDTH];
-
-board_t board = {b = &board_data[0][0]};
-
 //returns 0 if the game is won, nonzero value otherwise
 int play();
 

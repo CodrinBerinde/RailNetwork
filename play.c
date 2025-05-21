@@ -18,6 +18,10 @@
 #include "rendering.h"
 #include "generator.h"
 
+uint16_t board_data[BOARD_HEIGHT][BOARD_WIDTH];
+
+board_t board = {b = board_data};
+
 int play() {
   
 }

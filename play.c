@@ -28,7 +28,7 @@ int play() {
   init_rendering_constants();
   buf_t *buf = init_buffer();
 
-  generate(board);
+  generate(&board);
   draw(&board, buf);
 
   int event;

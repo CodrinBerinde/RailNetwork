@@ -40,11 +40,11 @@ void init_rendering_constants() {
 
 void fb_draw()
 {
-  uint16_t* p = fb->data;
+  uint16_t* p = buf->data;
 #ifndef QTRVSIM
   parlcd_write_cmd(parlcd_base, 0x2c);
 
-  for (int i = 0; i < fb->height * fb->width; i++)
+  for (int i = 0; i < buf->height * buf->width; i++)
     parlcd_write_data(parlcd_base, *(p++));
 #else
   memcpy(parlcd_base, fb->data, fb->height * fb->width * 2);
@@ -71,12 +71,12 @@ void fb_line(int dir, int x, int y1, int y2, uint16_t color) {
   if(dir == 0) { //the line is horizontal
     if(x < PARLCD_HEIGHT && y1 < PARLCD_WIDTH && y2 < PARLCD_WIDTH) {
       for(int i = x * PARLCD_WIDTH + y1; i <= x * PARLCD_WIDTH + y2; i++)
-        fb->data[i] = color;
+        buf->data[i] = color;
     }
   } else { //the line is vertical
     if(x < PARLCD_WIDTH && y1 < PARLCD_HEIGHT && y2 < PARLCD_HEIGHT) {
       for(int i = y1 * PARLCD_WIDTH + x; i <= y2 * PARLCD_WIDTH + x; i += PARLCD_WIDTH)
-        fb->data[i] = color;
+        buf->data[i] = color;
     }
   }
 }
@@ -84,12 +84,12 @@ void fb_line(int dir, int x, int y1, int y2, uint16_t color) {
 void fb_draw_empty_board() {
   //first we draw the horizontal lines
   for(int i = 0; i <= BOARD_HEIGHT; i++) {
-    fb_line(fb, 0, UB + i * (CH + BW), LB, LB + BOARD_WIDTH * (CW + BW), BORDER_COLOR);
+    fb_line(0, UB + i * (CH + BW), LB, LB + BOARD_WIDTH * (CW + BW), BORDER_COLOR);
   }
-  fb_line(fb, 0, 0, 0, PARLCD_WIDTH - 1, BORDER_COLOR);
+  fb_line(0, 0, 0, PARLCD_WIDTH - 1, BORDER_COLOR);
 
   //then we draw the vertical lines
   for(int i = 0; i <= BOARD_WIDTH; i++) {
-    fb_line(fb, 1, LB + i * (CW + BW), UB, UB + BOARD_HEIGHT * (CH + BW), BORDER_COLOR);
+    fb_line(1, LB + i * (CW + BW), UB, UB + BOARD_HEIGHT * (CH + BW), BORDER_COLOR);
   }
 }

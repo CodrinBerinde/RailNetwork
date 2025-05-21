@@ -4,12 +4,12 @@
 
   change_me.c      - main file
 
-  include your name there and license for distribution.
+  Berinde Codrin
+  berinde.gh.codrin@student.utcluj.ro
+  Technical University of Cluj-Napoca, Romania
 
-  Remove next text: This line should not appear in submitted
-  work and project name should be change to match real application.
-  If this text is there I want 10 points subtracted from final
-  evaluation.
+  developed at the Czech Technical University in Prague
+  Prague, Czech Republic - may 2025
 
  *******************************************************************/
 
@@ -32,43 +32,10 @@
 #endif
 #include "font_types.h"
 
-#define PARLCD_WIDTH 480
-#define PARLCD_HEIGHT 320
-
-typedef struct fbuf {
-  int width;
-  int height;
-  uint16_t *data;
-} fbuf_t;
-
-uint16_t fbuf0_data[PARLCD_WIDTH * PARLCD_HEIGHT];
-
-fbuf_t fbuf0 = {
-  .width = PARLCD_WIDTH,
-  .height = PARLCD_HEIGHT,
-  .data = fbuf0_data,
-};
-
-void fb_draw(fbuf_t *fb, unsigned char *parlcd_base)
-{
-  uint16_t* p = fb->data;
-#ifndef QTRVSIM
-  parlcd_write_cmd(parlcd_base, 0x2c);
-
-  for (int i = 0; i < fb->height * fb->width; i++)
-    parlcd_write_data(parlcd_base, *(p++));
-#else
-  memcpy(parlcd_base, fb->data, fb->height * fb->width * 2);
-#endif
-}
-
-void fb_clear(fbuf_t *fb, int color);
-
-void fb_pixel(fbuf_t *fb, int x, int y, int color);
-
-void fb_rectangle(fbuf_t *fb, int x0, int y0, int w, int h, int color);
-
-int fb_char(fbuf_t *fb, int x0, int y0, font_descriptor_t *font, int size, int color, char ch);
+#include "play.h"
+#include "events.h"
+#include "rendering.h"
+#include "generator.h"
 
 int main(int argc, char *argv[])
 {
@@ -81,14 +48,14 @@ int main(int argc, char *argv[])
     printf("System is occupied\n");
 
     if (1) {
-      printf("Waitting\n");
+      printf("Waiting\n");
       /* Wait till application holding lock releases it or exits */
       serialize_lock(0);
     }
   }
 #endif
 
-  printf("Hello worldd\n");
+  printf("Hello world\n");
 
 #ifndef QTRVSIM
   void *spiled_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE , 0);

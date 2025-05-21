@@ -14,6 +14,8 @@
 #ifndef GENERATOR_H
 #define GENERATOR_H
 
+#include "play.h"
 
+void generate(board_t *board);
 
 #endif

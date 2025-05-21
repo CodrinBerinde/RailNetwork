@@ -22,16 +22,24 @@
 #include "serialize_lock.h"
 #include "mzapo_parlcd.h"
 
-uint16_t board_data[BOARD_HEIGHT * BOARD_WIDTH];
-
-board_t board = {board_data};
-
-int play_game() {
+int play() {
+  uint16_t board_data[BOARD_HEIGHT * BOARD_WIDTH];
+  board_t board = {board_data};
   init_rendering_constants();
+  buf_t *buf = init_buffer();
 
-  fb_draw_empty_board();
-  fb_draw();
+  generate(board);
+  draw(&board, buf);
+
+  int event;
+
+  //fb_draw_empty_board();
+  //fb_draw();
   while(1) {
+    int event = listen_event();
+    if(event != 0) {
+      draw(&board, buf);
+    }
     sleep(1);
   }
 }

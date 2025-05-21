@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 
   printf("Hello world\n");
 
-  play_game();
+  play();
 
   sleep(1);
 

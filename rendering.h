@@ -37,9 +37,11 @@ typedef struct BUF {
   uint16_t *data;
 } buf_t;
 
-void fb_draw();
+void put_buffer(buf_t *buf);
 
 void init_rendering_constants();
+
+buf_t *init_buffer();
 
 void fb_clear(int color);
 
@@ -51,6 +53,6 @@ int fb_char(int x0, int y0, font_descriptor_t *font, int size, int color, char c
 
 void fb_line(int dir, int x, int y1, int y2, uint16_t color);
 
-void fb_draw_empty_board();
+void draw(board_t *board, buf_t *buf);
 
 #endif

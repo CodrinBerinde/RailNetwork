@@ -17,3 +17,12 @@
 #include "events.h"
 #include "rendering.h"
 #include "generator.h"
+
+void generate(board_t *board) {
+  //generate dummy board
+  for(int i = 0; i < BOARD_HEIGHT; i++) {
+    for(int j = 0; j < BOARD_WIDTH; j++) {
+      *(board->data) = 0;
+    }
+  }
+}

@@ -22,29 +22,32 @@
 #include "serialize_lock.h"
 #include "mzapo_parlcd.h"
 
-uint16_t buf0_data[PARLCD_WIDTH * PARLCD_HEIGHT];
-
-buf_t buf = {
-  .width = PARLCD_WIDTH,
-  .height = PARLCD_HEIGHT,
-  .data = buf0_data,
-};
-
 void *spiled_base;
 unsigned char *parlcd_base;
+uint16_t buf0_data[PARLCD_WIDTH * PARLCD_HEIGHT];
+buf_t buf;
 
 void init_rendering_constants() {
   spiled_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE , 0);
   parlcd_base = map_phys_address(PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE , 0);
 }
 
-void fb_draw()
+buf_t *init_buffer() {
+  uint16_t buf_data = (uint16_t *)malloc(PARLCD_WIDTH * PARLCD_HEIGHT * 2);
+  buf_t *buf = (buf_t *)malloc(sizeof(buf));
+  *(buf->width) = PARLCD_WIDTH;
+  *(buf->height) = PARLCD_HEIGHT;
+  buf->data = buf_data;
+  return buf;
+}
+
+void put_buffer(buf_t *buf)
 {
-  uint16_t* p = buf.data;
+  uint16_t* p = buf->data;
 
   parlcd_write_cmd(parlcd_base, 0x2c);
 
-  for (int i = 0; i < buf.height * buf.width; i++)
+  for (int i = 0; i < buf->height * buf->width; i++)
     parlcd_write_data(parlcd_base, *(p++));
 }
 
@@ -78,7 +81,7 @@ void fb_line(int dir, int x, int y1, int y2, uint16_t color) {
   }
 }
 
-void fb_draw_empty_board() {
+void draw(board_t *board, buf_t *buf) {
   //first we draw the horizontal lines
   for(int i = 0; i <= BOARD_HEIGHT; i++) {
     //fb_line(0, UB + i * (CH + BW), LB, 100, BORDER_COLOR);
@@ -90,4 +93,6 @@ void fb_draw_empty_board() {
   for(int i = 0; i <= BOARD_WIDTH; i++) {
     fb_line(1, LB + i * (CW + BW), UB, UB + BOARD_HEIGHT * (CH + BW), BORDER_COLOR);
   }
+
+  put_buffer(buf);
 }

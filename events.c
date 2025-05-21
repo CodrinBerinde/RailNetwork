@@ -19,5 +19,5 @@
 #include "generator.h"
 
 int listen_event() {
-
+  return 0;
 }

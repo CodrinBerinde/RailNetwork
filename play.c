@@ -17,11 +17,26 @@
 #include "events.h"
 #include "rendering.h"
 #include "generator.h"
+#include "mzapo_phys.h"
+#include "mzapo_regs.h"
+#include "serialize_lock.h"
+#include "mzapo_parlcd.h"
 
-uint16_t board_data[BOARD_HEIGHT][BOARD_WIDTH];
+void *spiled_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE , 0);
+unsigned char *parlcd_base = map_phys_address(PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE , 0);
 
-board_t board = {b = board_data};
+uint16_t buf0_data[PARLCD_WIDTH * PARLCD_HEIGHT];
+
+buf_t buf = {
+  .width = PARLCD_WIDTH,
+  .height = PARLCD_HEIGHT,
+  .data = buf0_data,
+};
 
 int play() {
-  
+  fb_draw_empty_board(buf);
+  fb_draw(buf, LCD_FB_START);
+  while(1) {
+    sleep(1);
+  }
 }

@@ -15,6 +15,10 @@
 #define RENDERING_H
 
 #include <stdlib.h>
+#include "mzapo_phys.h"
+#include "mzapo_regs.h"
+#include "serialize_lock.h"
+#include "mzapo_parlcd.h"
 #include "font_types.h"
 
 #define PARLCD_WIDTH 480
@@ -31,14 +35,6 @@ typedef struct BUF {
   uint16_t *data;
 } buf_t;
 
-uint16_t buf0_data[PARLCD_WIDTH * PARLCD_HEIGHT];
-
-buf_t buf = {
-  .width = PARLCD_WIDTH,
-  .height = PARLCD_HEIGHT,
-  .data = buf0_data,
-};
-
 void fb_draw(buf_t *fb, unsigned char *parlcd_base);
 
 void fb_clear(buf_t *fb, int color);
@@ -48,5 +44,9 @@ void fb_pixel(buf_t *fb, int x, int y, int color);
 void fb_rectangle(buf_t *fb, int x0, int y0, int x1, int y1, int color);
 
 int fb_char(buf_t *fb, int x0, int y0, font_descriptor_t *font, int size, int color, char ch);
+
+void fb_line(buf_t *fb, int dir, int x, int y1, int y2);
+
+void fb_draw_empty_board(buf_t *fb);
 
 #endif

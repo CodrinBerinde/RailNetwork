@@ -37,26 +37,20 @@ typedef struct BUF {
   uint16_t *data;
 } buf_t;
 
-uint16_t buf0_data[PARLCD_WIDTH * PARLCD_HEIGHT];
+void fb_draw();
 
-buf_t buf = {
-  .width = PARLCD_WIDTH,
-  .height = PARLCD_HEIGHT,
-  .data = buf0_data,
-};
+void init_rendering_constants();
 
-void fb_draw(buf_t *fb, unsigned char *parlcd_base);
+void fb_clear(int color);
 
-void fb_clear(buf_t *fb, int color);
+void fb_pixel(int x, int y, int color);
 
-void fb_pixel(buf_t *fb, int x, int y, int color);
+void fb_rectangle(int x0, int y0, int x1, int y1, int color);
 
-void fb_rectangle(buf_t *fb, int x0, int y0, int x1, int y1, int color);
+int fb_char(int x0, int y0, font_descriptor_t *font, int size, int color, char ch);
 
-int fb_char(buf_t *fb, int x0, int y0, font_descriptor_t *font, int size, int color, char ch);
+void fb_line(int dir, int x, int y1, int y2, uint16_t color);
 
-void fb_line(buf_t *fb, int dir, int x, int y1, int y2, uint16_t color);
-
-void fb_draw_empty_board(buf_t *fb);
+void fb_draw_empty_board();
 
 #endif

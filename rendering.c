@@ -22,7 +22,23 @@
 #include "serialize_lock.h"
 #include "mzapo_parlcd.h"
 
-void fb_draw(buf_t *fb, unsigned char *parlcd_base)
+uint16_t buf0_data[PARLCD_WIDTH * PARLCD_HEIGHT];
+
+buf_t buf = {
+  .width = PARLCD_WIDTH,
+  .height = PARLCD_HEIGHT,
+  .data = buf0_data,
+};
+
+void *spiled_base;
+unsigned char *parlcd_base;
+
+void init_rendering_constants() {
+  spiled_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE , 0);
+  parlcd_base = map_phys_address(PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE , 0);
+}
+
+void fb_draw()
 {
   uint16_t* p = fb->data;
 #ifndef QTRVSIM
@@ -35,23 +51,23 @@ void fb_draw(buf_t *fb, unsigned char *parlcd_base)
 #endif
 }
 
-void fb_clear(buf_t *fb, int color) {
+void fb_clear(int color) {
 
 }
 
-void fb_pixel(buf_t *fb, int x, int y, int color) {
+void fb_pixel(int x, int y, int color) {
 
 }
 
-void fb_rectangle(buf_t *fb, int x0, int y0, int w, int h, int color) {
+void fb_rectangle(int x0, int y0, int w, int h, int color) {
 
 }
 
-int fb_char(buf_t *fb, int x0, int y0, font_descriptor_t *font, int size, int color, char ch) {
+int fb_char(int x0, int y0, font_descriptor_t *font, int size, int color, char ch) {
 
 }
 
-void fb_line(buf_t *fb, int dir, int x, int y1, int y2, uint16_t color) {
+void fb_line(int dir, int x, int y1, int y2, uint16_t color) {
   if(dir == 0) { //the line is horizontal
     if(x < PARLCD_HEIGHT && y1 < PARLCD_WIDTH && y2 < PARLCD_WIDTH) {
       for(int i = x * PARLCD_WIDTH + y1; i <= x * PARLCD_WIDTH + y2; i++)
@@ -65,12 +81,12 @@ void fb_line(buf_t *fb, int dir, int x, int y1, int y2, uint16_t color) {
   }
 }
 
-void fb_draw_empty_board(buf_t *fb) {
+void fb_draw_empty_board() {
   //first we draw the horizontal lines
   for(int i = 0; i <= BOARD_HEIGHT; i++) {
     fb_line(fb, 0, UB + i * (CH + BW), LB, LB + BOARD_WIDTH * (CW + BW), BORDER_COLOR);
   }
-  fb_line(fb, 0, 0, 0, BOARD_WIDTH - 1, BORDER_COLOR);
+  fb_line(fb, 0, 0, 0, PARLCD_WIDTH - 1, BORDER_COLOR);
 
   //then we draw the vertical lines
   for(int i = 0; i <= BOARD_WIDTH; i++) {

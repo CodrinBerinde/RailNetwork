@@ -27,11 +27,10 @@ uint16_t board_data[BOARD_HEIGHT * BOARD_WIDTH];
 board_t board = {board_data};
 
 int play_game() {
-  void *spiled_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE , 0);
-  unsigned char *parlcd_base = map_phys_address(PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE , 0);
+  init_rendering_constants();
 
-  fb_draw_empty_board(&buf);
-  fb_draw(&buf, parlcd_base);
+  fb_draw_empty_board();
+  fb_draw();
   while(1) {
     sleep(1);
   }

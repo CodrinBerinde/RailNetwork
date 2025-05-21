@@ -23,7 +23,7 @@
 #define BOARD_WIDTH 28 // 12 columns of cells
 
 typedef struct BOARD {
-  uint16_t *b[];
+  uint16_t *b;
 } board_t;
 
 //returns 0 if the game is won, nonzero value otherwise

@@ -18,7 +18,7 @@
 #define BOARD_WIDTH 28 // 12 columns of cells
 
 typedef struct BOARD {
-  uint8_t *b;
+  uint16_t *b;
 } board_t;
 
 uint16_t board_data[BOARD_HEIGHT][BOARD_WIDTH];

@@ -15,7 +15,7 @@
 
 #include "rendering.h"
 
-void fb_draw(fbuf_t *fb, unsigned char *parlcd_base)
+void fb_draw(buf_t *fb, unsigned char *parlcd_base)
 {
   uint16_t* p = fb->data;
 #ifndef QTRVSIM
@@ -28,18 +28,18 @@ void fb_draw(fbuf_t *fb, unsigned char *parlcd_base)
 #endif
 }
 
-void fb_clear(fbuf_t *fb, int color) {
+void fb_clear(buf_t *fb, int color) {
 
 }
 
-void fb_pixel(fbuf_t *fb, int x, int y, int color) {
+void fb_pixel(buf_t *fb, int x, int y, int color) {
 
 }
 
-void fb_rectangle(fbuf_t *fb, int x0, int y0, int w, int h, int color) {
+void fb_rectangle(buf_t *fb, int x0, int y0, int w, int h, int color) {
 
 }
 
-int fb_char(fbuf_t *fb, int x0, int y0, font_descriptor_t *font, int size, int color, char ch) {
+int fb_char(buf_t *fb, int x0, int y0, font_descriptor_t *font, int size, int color, char ch) {
 
 }

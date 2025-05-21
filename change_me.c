@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
   unsigned char *parlcd_base = (unsigned char *)LCD_FB_START;
 #endif
 
-  fbuf_t *fb = &fbuf0;
+  //fbuf_t *fb = &fbuf0;
 
 while(1) {
 
@@ -78,7 +78,7 @@ while(1) {
   //fb_clear(fb, 0);
   //fb_rectangle(fb, 100, 50, 200, 100, 0xf800);
   //fb_str(fb, 100, 100, &font_winFreeSystem14x16, 1, 0xffff, "Hello APO!");
-  fb_draw(fb, parlcd_base);
+  //fb_draw(fb, parlcd_base);
 
 }
 #ifndef QTRVSIM

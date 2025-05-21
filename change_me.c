@@ -35,7 +35,7 @@
 
 uint16_t board_data[BOARD_HEIGHT][BOARD_WIDTH];
 
-board_t board = {b = board_data};
+board_t board = {board_data};
 
 int main(int argc, char *argv[])
 {

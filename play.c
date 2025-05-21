@@ -22,15 +22,9 @@
 #include "serialize_lock.h"
 #include "mzapo_parlcd.h"
 
+uint16_t board_data[BOARD_HEIGHT * BOARD_WIDTH];
 
-
-uint16_t buf0_data[PARLCD_WIDTH * PARLCD_HEIGHT];
-
-buf_t buf = {
-  .width = PARLCD_WIDTH,
-  .height = PARLCD_HEIGHT,
-  .data = buf0_data,
-};
+board_t board = {board_data};
 
 int play_game() {
   void *spiled_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE , 0);

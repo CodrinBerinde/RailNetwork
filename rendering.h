@@ -29,11 +29,21 @@
 #define UB 6 // upper border - in pixels
 #define LB 6 // left border - in pixels
 
+#define BORDER_COLOR 0xffff
+
 typedef struct BUF {
   int width;
   int height;
   uint16_t *data;
 } buf_t;
+
+uint16_t buf0_data[PARLCD_WIDTH * PARLCD_HEIGHT];
+
+buf_t buf = {
+  .width = PARLCD_WIDTH,
+  .height = PARLCD_HEIGHT,
+  .data = buf0_data,
+};
 
 void fb_draw(buf_t *fb, unsigned char *parlcd_base);
 

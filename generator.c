@@ -13,4 +13,7 @@
 
 #include <stdlib.h>
 
+#include "play.h"
+#include "events.h"
+#include "rendering.h"
 #include "generator.h"

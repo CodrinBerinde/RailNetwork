@@ -33,10 +33,6 @@
 #include "rendering.h"
 #include "generator.h"
 
-uint16_t board_data[BOARD_HEIGHT * BOARD_WIDTH];
-
-board_t board = {board_data};
-
 int main(int argc, char *argv[])
 {
 

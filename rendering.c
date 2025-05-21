@@ -81,10 +81,10 @@ void fb_line(int dir, int x, int y1, int y2, uint16_t color) {
 void fb_draw_empty_board() {
   //first we draw the horizontal lines
   for(int i = 0; i <= BOARD_HEIGHT; i++) {
-    fb_line(0, UB + i * (CH + BW), LB, 100, BORDER_COLOR);
-    //fb_line(0, UB + i * (CH + BW), LB, LB + BOARD_WIDTH * (CW + BW), BORDER_COLOR);
+    //fb_line(0, UB + i * (CH + BW), LB, 100, BORDER_COLOR);
+    fb_line(0, UB + i * (CH + BW), LB, LB + BOARD_WIDTH * (CW + BW), BORDER_COLOR);
   }
-  fb_line(0, 0, 0, PARLCD_WIDTH - 1, BORDER_COLOR);
+  //fb_line(0, 0, 0, PARLCD_WIDTH - 1, BORDER_COLOR);
 
   //then we draw the vertical lines
   for(int i = 0; i <= BOARD_WIDTH; i++) {

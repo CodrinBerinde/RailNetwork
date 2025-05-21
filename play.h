@@ -20,7 +20,7 @@
 #include "mzapo_parlcd.h"
 
 #define BOARD_HEIGHT 18 // 18 rows of cells
-#define BOARD_WIDTH 28 // 12 columns of cells
+#define BOARD_WIDTH 27 // 12 columns of cells
 
 typedef struct BOARD {
   uint16_t *b;

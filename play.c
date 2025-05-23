@@ -27,6 +27,7 @@ int play() {
   board_t board = {board_data};
   cell_t selected = {0, 0}, under_constr = {-1, 0};
   init_rendering_constants();
+  init_reading_constants();
   buf_t *buf = init_buffer();
 
   generate(&board);
@@ -38,7 +39,6 @@ int play() {
   while(1) {
     
     //here we attempt to read from SPILED knobs
-    printf("I read: %d.\n", *(uint16_t *)(spiled_base + SPILED_REG_KNOBS_8BIT_o));
 
 
     int event = listen_event();

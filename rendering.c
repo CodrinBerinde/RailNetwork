@@ -22,11 +22,9 @@
 #include "serialize_lock.h"
 #include "mzapo_parlcd.h"
 
-void *spiled_base;
 unsigned char *parlcd_base;
 
 void init_rendering_constants() {
-  spiled_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE , 0);
   parlcd_base = map_phys_address(PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE , 0);
 }
 

@@ -134,7 +134,7 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
     i1 = i0 + UCB - 1;
     rectangle_buf(buf, i0, j0, i1, j1, UC_COLOR);
 
-    j0 = j0 + UCW - UCA + CW - UCA + UCW;
+    j0 = j0 + UCW - UCA + CW - UCA;
     j1 = j0 + UCW - 1;
     rectangle_buf(buf, i0, j0, i1, j1, UC_COLOR);
 

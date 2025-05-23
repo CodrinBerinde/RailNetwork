@@ -69,7 +69,7 @@ void rectangle_buf(buf_t *buf, int i0, int j0, int i1, int j1, uint16_t color) {
 
 void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, uint16_t color, char ch) {
   for(unsigned int line = 0; line < font->height; line++) {
-    for(int pixel = 0; pixel < maxwidth; pixel++) {
+    for(int pixel = 0; pixel < font->maxwidth; pixel++) {
       if((font->bits[font->height * ch + line] >> (font->maxwidth - pixel - 1)) & 1) {
         buf->data[(i + line) * PARLCD_WIDTH + pixel] = color;
       }

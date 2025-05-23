@@ -26,4 +26,5 @@ void generate(board_t *board) {
     }
   }
   board->data[15] = 4;
+  board->data[100] = 12;
 }

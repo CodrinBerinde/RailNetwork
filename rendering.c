@@ -25,9 +25,11 @@
 #include "font_types.h"
 
 unsigned char *parlcd_base;
+font_descriptor_t *city_size_font;
 
 void init_rendering_constants() {
   parlcd_base = map_phys_address(PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE , 0);
+  city_size_font = &font_rom8x16;
 }
 
 buf_t *init_buffer() {
@@ -73,12 +75,8 @@ void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, uint1
     for(int pixel = 0; pixel < font->maxwidth; pixel++) {
       if(((font->bits[font->height * ch + line]) >> (15 - pixel)) & 1) {
         buf->data[(i + line) * PARLCD_WIDTH + pixel + j] = color;
-        printf("X");
       }
-      else
-        printf(" ");
     }
-    printf("\n");
   }
 }
 
@@ -107,9 +105,17 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
   for(int i = 0; i < BOARD_HEIGHT; i++) {
     for(int j = 0; j < BOARD_WIDTH; j++) {
       if(((board->data[i * BOARD_WIDTH + j]) & 15) != 0) {
+        int i_char, j_char; //the stating point of the printing of character
         int city_size = ((board->data[i * BOARD_WIDTH + j]) & 15);
+        i_char = UB + BW + i * (CH + BW) + (CH - city_size_font->height) / 2;
         if(city_size < 10) { //then there is a single character to be printed
-          char_buf(buf, UB + BW + i * (CH + BW), LB + BW + j * (CW + BW), &font_rom8x16, 0, 0xffff, city_size + '0');
+          j_char = LB + BW + j * (CW + BW) + (CW - city_size_font->maxwidth) / 2;
+          char_buf(buf, i_char, j_char, city_size_font, 0, 0xffff, city_size + '0');
+        } else { //then there are two characters to print
+          j_char = LB + BW + j * (CW + BW) + (CW - 2 * city_size_font->maxwidth) / 2;
+          char_buf(buf, i_char, j_char, city_size_font, 0, 0xffff, city_size/10 + '0');
+          j_char += city_size_font->maxwidth;
+          char_buf(buf, i_char, j_char, city_size_font, 0, 0xffff, city_size%10 + '0');
         }
       }
     }

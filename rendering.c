@@ -76,31 +76,15 @@ int fb_char(buf_t *buf, int x0, int y0, font_descriptor_t *font, int size, int c
   
 }
 
-void fb_line(buf_t *buf, int dir, int x, int y1, int y2, uint16_t color) {
-  if(dir == 0) { //the line is horizontal
-    if(x < PARLCD_HEIGHT && y1 < PARLCD_WIDTH && y2 < PARLCD_WIDTH) {
-      for(int i = x * PARLCD_WIDTH + y1; i <= x * PARLCD_WIDTH + y2; i++)
-        buf->data[i] = color;
-    }
-  } else { //the line is vertical
-    if(x < PARLCD_WIDTH && y1 < PARLCD_HEIGHT && y2 < PARLCD_HEIGHT) {
-      for(int i = y1 * PARLCD_WIDTH + x; i <= y2 * PARLCD_WIDTH + x; i += PARLCD_WIDTH)
-        buf->data[i] = color;
-    }
-  }
-}
-
 void draw_initial_board(buf_t *buf) {
   //first we draw the horizontal lines
   for(int i = 0; i <= BOARD_HEIGHT; i++) {
-    rectangle_buf(buf, UB + i * (CH + BW), LB, UB + i * (CH + BW) + BW, LB + BOARD_WIDTH * (CW + BW), BORDER_COLOR);
-    //fb_line(buf, 0, UB + i * (CH + BW), LB, LB + BOARD_WIDTH * (CW + BW), BORDER_COLOR);
+    rectangle_buf(buf, UB + i * (CH + BW), LB, UB + i * (CH + BW) + BW - 1, LB + BOARD_WIDTH * (CW + BW), BORDER_COLOR);
   }
 
   //then we draw the vertical lines
   for(int i = 0; i <= BOARD_WIDTH; i++) {
-    rectangle_buf(buf, UB, LB + i * (CW + BW), UB + BOARD_HEIGHT * (CW + BW), LB + i * (CW + BW) + BW, BORDER_COLOR);
-    //fb_line(buf, 1, LB + i * (CW + BW), UB, UB + BOARD_HEIGHT * (CH + BW), BORDER_COLOR);
+    rectangle_buf(buf, UB, LB + i * (CW + BW), UB + BOARD_HEIGHT * (CW + BW), LB + i * (CW + BW) + BW - 1, BORDER_COLOR);
   }
 }
 

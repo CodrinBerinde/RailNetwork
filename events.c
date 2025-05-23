@@ -80,7 +80,6 @@ int listen_event() {
   if((knobs >> 25)) { //either the red or the green knobs is pushed
     if(push_state == 0) {
       push_state = 1;
-      printf("only now I send yes\n");
       return 5;
     }
   } else {

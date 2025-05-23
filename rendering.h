@@ -30,8 +30,9 @@
 #define LB 6 // left border - in pixels
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
-#define UCA 0.25 * MIN(CW, CH)
-#define UCB 0.8 * UCA
+#define UCA (0.25 * MIN(CW, CH))
+#define UCB (0.8 * UCA)
+#define UCAB (UCA - UCB)
 #define UCW 3
 #define UC_COLOR 0x07e0//under construction color
 

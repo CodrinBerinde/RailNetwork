@@ -62,6 +62,8 @@ void fb_pixel(int x, int y, int color) {
 }
 
 void rectangle_buf(buf_t *buf, int i0, int j0, int i1, int j1, uint16_t color) {
+  if(i0 < 0 || i1 < 0 || j0 < 0 || j1 < 0 || i0 >= PARLCD_HEIGHT || i1 >= PARLCD_HEIGHT || j0 >= PARLCD_WIDTH || j1 >= PARLCD_WIDTH)
+    return;
   for(int i = i0; i <= i1; i++) {
     for(int j = j0; j <= j1; j++) {
       buf->data[i * PARLCD_WIDTH + j] = color;
@@ -91,12 +93,14 @@ void fb_line(buf_t *buf, int dir, int x, int y1, int y2, uint16_t color) {
 void draw_initial_board(buf_t *buf) {
   //first we draw the horizontal lines
   for(int i = 0; i <= BOARD_HEIGHT; i++) {
-    fb_line(buf, 0, UB + i * (CH + BW), LB, LB + BOARD_WIDTH * (CW + BW), BORDER_COLOR);
+    rectangle_buf(buf, UB + i * (CH + BW), LB, UB + i * (CH + BW) + BW, LB + BOARD_WIDTH * (CW + BW), BORDER_COLOR);
+    //fb_line(buf, 0, UB + i * (CH + BW), LB, LB + BOARD_WIDTH * (CW + BW), BORDER_COLOR);
   }
 
   //then we draw the vertical lines
   for(int i = 0; i <= BOARD_WIDTH; i++) {
-    fb_line(buf, 1, LB + i * (CW + BW), UB, UB + BOARD_HEIGHT * (CH + BW), BORDER_COLOR);
+    rectangle_buf(buf, UB, LB + i * (CW + BW), UB + BOARD_HEIGHT * (CW + BW), LB + i * (CW + BW) + BW, BORDER_COLOR);
+    //fb_line(buf, 1, LB + i * (CW + BW), UB, UB + BOARD_HEIGHT * (CH + BW), BORDER_COLOR);
   }
 }
 
@@ -105,14 +109,8 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
 
   draw_initial_board(buf); //draw the cells
 
-  //rectangle_buf(buf, 0, 0, 16, 16, 0xffff);
-
-  //printf("selected cell is %d, %d, coordinates are %d, %d, %d, %d.\n", selected->i, selected->j, 
-  //    UB + BW + (CH + BW) * (selected->i), UB + BW + (CH + BW) * (selected->i) + CH,
-  //              LB + BW + (CW + BW) * (selected->j), LB + BW + (CW + BW) * (selected->j) + CW);
-
   rectangle_buf(buf, UB + BW + (CH + BW) * (selected->i), LB + BW + (CW + BW) * (selected->j),
-                UB + BW + (CH + BW) * (selected->i) + CH, LB + BW + (CW + BW) * (selected->j) + CW, 0xffff); //draw the selected cell
+                UB + BW + (CH + BW) * (selected->i) + CH, LB + BW + (CW + BW) * (selected->j) + CW, SELECTED_COLOR); //draw the selected cell
 
   //we draw the cities
   for(int i = 0; i < BOARD_HEIGHT; i++) {

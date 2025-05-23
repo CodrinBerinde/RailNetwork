@@ -36,10 +36,8 @@ int play() {
   refresh_board(&board, buf, &selected, &under_constr);
   put_buffer(buf);
 
-  //fb_draw_empty_board();
-  //fb_draw();
-  while(1) {
-
+  int event = 0;
+  while (event != 6) {
     int event = listen_event();
     if(event != 0) {
       switch(event) {

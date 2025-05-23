@@ -53,8 +53,6 @@ int main(int argc, char *argv[])
 
   play();
 
-  sleep(1);
-
   printf("Goodbye world\n");
 
   /* Release the lock */

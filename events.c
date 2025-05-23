@@ -69,7 +69,13 @@ int listen_event() {
     prev_knob_green = knob_green;
   }
 
-  printf("Maybe it is %d.\n", (knobs >> 24));
+  if((knobs >> 24) & 1) { // the blue knob has been pushed
+    res = 6;
+  }
+
+  if((knobs >> 25)) { //either the red or the green knobs was pushed
+    res = 5;
+  }
 
   return res;
 }

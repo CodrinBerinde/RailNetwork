@@ -36,6 +36,11 @@ int play() {
   //fb_draw_empty_board();
   //fb_draw();
   while(1) {
+    
+    //here we attempt to read from SPILED knobs
+    printf("I read: %d.\n", *(uint16_t *)(spiled_base + SPILED_REG_KNOBS_8BIT_o));
+
+
     int event = listen_event();
     if(event != 0) {
       refresh_board(&board, buf, &selected, &under_constr);

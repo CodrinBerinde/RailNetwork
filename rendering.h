@@ -46,11 +46,9 @@ buf_t *init_buffer();
 
 void clear_buf(buf_t *buf, uint16_t color);
 
-void fb_pixel(int x, int y, int color);
-
 void rectangle_buf(buf_t *buf, int x0, int y0, int x1, int y1, uint16_t color);
 
-int fb_char(buf_t *buf, int x0, int y0, font_descriptor_t *font, int size, int color, char ch);
+void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, int color, char ch);
 
 void draw_initial_board(buf_t *buf);
 

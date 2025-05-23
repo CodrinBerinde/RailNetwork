@@ -71,8 +71,6 @@ int listen_event() {
     return res;
   }
 
-  
-
   if((knobs >> 24) & 1) { // the blue knob has been pushed
     return 6;
   }

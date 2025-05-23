@@ -21,6 +21,7 @@
 #include "mzapo_regs.h"
 #include "serialize_lock.h"
 #include "mzapo_parlcd.h"
+#include "font_types.h"
 
 unsigned char *parlcd_base;
 
@@ -55,10 +56,6 @@ void clear_buf(buf_t *buf, uint16_t color) {
   }
 }
 
-void fb_pixel(int x, int y, int color) {
-
-}
-
 void rectangle_buf(buf_t *buf, int i0, int j0, int i1, int j1, uint16_t color) {
   if(i0 < 0 || i1 < 0 || j0 < 0 || j1 < 0 || i0 >= PARLCD_HEIGHT || i1 >= PARLCD_HEIGHT || j0 >= PARLCD_WIDTH || j1 >= PARLCD_WIDTH)
     return;
@@ -69,8 +66,7 @@ void rectangle_buf(buf_t *buf, int i0, int j0, int i1, int j1, uint16_t color) {
   }
 }
 
-//int fb_char(buf_t *buf, int i0, int j0, font_descriptor_t *font, int size, int color, char ch) {
-int fb_char(buf_t *buf, int x0, int y0, font_descriptor_t *font, int size, int color, char ch) {
+void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, int color, char ch) {
   
 }
 
@@ -98,9 +94,13 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
   //we draw the cities
   for(int i = 0; i < BOARD_HEIGHT; i++) {
     for(int j = 0; j < BOARD_WIDTH; j++) {
-      //if((board->data[i * BOARD_WIDTH + j] & 15) != 0)
-      //  int city_size = ((*(board->data[i * BOARD_WIDTH + j])) & 15);
+      if((board->data[i * BOARD_WIDTH + j] & 15) != 0) {
+        int city_size = (board->data[i * BOARD_WIDTH + j] & 15);
+        if(city_size < 10) { //then there is a single character to be printed
+          char(buf, UB + BW + i * (CH + BW), LB + BW + j * (CW + BW), font_rom8x16, 0, 0xffff, city_size + '0');
+        }
         //fb_char(buf, UB + i * (CH + BW), LB + j * (CW + BW), 0xffff, city_size%10 + '0');
+      }
     }
   }
 }

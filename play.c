@@ -23,15 +23,14 @@
 #include "mzapo_parlcd.h"
 
 int play() {
-  uint16_t board_data[BOARD_HEIGHT * BOARD_WIDTH];
+  uint8_t board_data[BOARD_HEIGHT * BOARD_WIDTH];
   board_t board = {board_data};
-  cell_t selected
+  cell_t selected = {0, 0}, under_constr = {-1, 0};
   init_rendering_constants();
   buf_t *buf = init_buffer();
-  draw_initial_board(buf);
 
   generate(&board);
-  refresh_board(&board, buf);
+  refresh_board(&board, buf, &selected, &under_constr);
   put_buffer(buf);
 
   //fb_draw_empty_board();
@@ -39,7 +38,7 @@ int play() {
   while(1) {
     int event = listen_event();
     if(event != 0) {
-      refresh_board(&board, buf);
+      refresh_board(&board, buf, &selected, &under_constr);
       put_buffer(buf);
     }
     sleep(1);

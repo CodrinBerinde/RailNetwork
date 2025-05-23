@@ -49,16 +49,24 @@ void put_buffer(buf_t *buf)
     parlcd_write_data(parlcd_base, *(p++));
 }
 
-void fb_clear(int color) {
-
+void clear_buf(buf_t *buf, uint16_t color) {
+  for(int i = 0; i < PARLCD_HEIGHT; i++) {
+    for(int j = 0; j < PARLCD_WIDTH; j++) {
+      buf->data[i] = color;
+    }
+  }
 }
 
 void fb_pixel(int x, int y, int color) {
 
 }
 
-void fb_rectangle(int x0, int y0, int w, int h, int color) {
-
+void rectangle_buf(buf_t *buf, int i0, int j0, int i1, int j1, uint16_t color) {
+  for(int i = i0; i <= i1; i++) {
+    for(int j = j0; j <= j1; j++) {
+      buf->data[i * PARLCD_WIDTH + j] = color;
+    }
+  }
 }
 
 //int fb_char(buf_t *buf, int i0, int j0, font_descriptor_t *font, int size, int color, char ch) {
@@ -92,7 +100,15 @@ void draw_initial_board(buf_t *buf) {
   }
 }
 
-void refresh_board(board_t *board, buf_t *buf) {
+void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_constr) {
+  clear_buf(buf, 0); //clear the entire buffer
+
+  draw_initial_board(buf); //draw the cells
+
+  rectangle_buf(buf, UB + BW + (CH + BW) * selected->i, UB + BW + (CH + BW) * selected->i + CH,
+                LB + BW + (CW + BW) * selected->j, LB + BW + (CW + BW) * selected->j + CW, 0xffff); //draw the selected cell
+
+  //we draw the cities
   for(int i = 0; i < BOARD_HEIGHT; i++) {
     for(int j = 0; j < BOARD_WIDTH; j++) {
       if(((*(board->data[i * BOARD_WIDTH + j])) & 15) != 0)

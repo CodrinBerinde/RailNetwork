@@ -25,5 +25,5 @@ void generate(board_t *board) {
       *(board->data) = 0;
     }
   }
-  *(board->data[15]) = 4;
+  board->data[15] = 4;
 }

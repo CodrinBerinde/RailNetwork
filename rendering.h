@@ -43,11 +43,11 @@ void init_rendering_constants();
 
 buf_t *init_buffer();
 
-void fb_clear(int color);
+void clear_buf(buf_t *buf, uint16_t color);
 
 void fb_pixel(int x, int y, int color);
 
-void fb_rectangle(int x0, int y0, int x1, int y1, int color);
+void rectangle_buf(buf_t *buf, int x0, int y0, int x1, int y1, uint16_t color);
 
 int fb_char(buf_t *buf, int x0, int y0, font_descriptor_t *font, int size, int color, char ch);
 
@@ -55,7 +55,7 @@ void fb_line(buf_t *buf, int dir, int x, int y1, int y2, uint16_t color);
 
 void draw_initial_board(buf_t *buf);
 
-void refresh_board(board_t *board, buf_t *buf);
+void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_constr);
 
 void clear_mem_buffer(buf_t *buf);
 

@@ -111,8 +111,8 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
   //we draw the cities
   for(int i = 0; i < BOARD_HEIGHT; i++) {
     for(int j = 0; j < BOARD_WIDTH; j++) {
-      if((board->data[i * BOARD_WIDTH + j] & 15) != 0)
-        int city_size = ((*(board->data[i * BOARD_WIDTH + j])) & 15);
+      //if((board->data[i * BOARD_WIDTH + j] & 15) != 0)
+      //  int city_size = ((*(board->data[i * BOARD_WIDTH + j])) & 15);
         //fb_char(buf, UB + i * (CH + BW), LB + j * (CW + BW), 0xffff, city_size%10 + '0');
     }
   }

@@ -105,10 +105,10 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
 
   draw_initial_board(buf); //draw the cells
 
-  rectangle_buf(buf, 0, 0, 16, 16, 0xffff);
+  //rectangle_buf(buf, 0, 0, 16, 16, 0xffff);
 
-  rectangle_buf(buf, UB + BW + (CH + BW) * selected->i, UB + BW + (CH + BW) * selected->i + CH,
-                LB + BW + (CW + BW) * selected->j, LB + BW + (CW + BW) * selected->j + CW, 0xffff); //draw the selected cell
+  rectangle_buf(buf, UB + BW + (CH + BW) * (selected->i), UB + BW + (CH + BW) * (selected->i) + CH,
+                LB + BW + (CW + BW) * (selected->j), LB + BW + (CW + BW) * (selected->j) + CW, 0xffff); //draw the selected cell
 
   //we draw the cities
   for(int i = 0; i < BOARD_HEIGHT; i++) {

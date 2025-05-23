@@ -47,13 +47,13 @@ int play() {
         case 0: break;
         case 1: break;
         case 2:
-          if(selected->i < BOARD_HEIGHT - 1)
-            selected->i++;
+          if(selected.i < BOARD_HEIGHT - 1)
+            selected.i++;
           break;
         case 3: break;
         case 4:
-          if(selected->i > 0)
-            selected->i--;
+          if(selected.i > 0)
+            selected.i--;
           break;
       }
 

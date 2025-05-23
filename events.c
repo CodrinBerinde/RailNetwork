@@ -37,7 +37,7 @@ int listen_event() {
   uint32_t knob_red = (knobs >> 16) & 255;
   uint32_t knob_green = (knobs >> 8) & 255;
   uint32_t knob_blue = knobs & 255;
-  printf("Hello from the events! now red is %d, previus it was %d.\n", knob_red, prev_knob_red);
+
   if(knob_red != prev_knob_red && knob_red % 4 == 0) {
     if(knob_red > prev_knob_red) {
       if(knob_red - prev_knob_red < SAFETY_KNOB_DIFFERENCE) //it means that the knob moved up
@@ -61,13 +61,12 @@ int listen_event() {
         res = 3;
     } else {
       if(prev_knob_green - knob_green < SAFETY_KNOB_DIFFERENCE) //it means that the knob moved down
-        res = 1;
-      else
         res = 3;
+      else
+        res = 1;
     }
     prev_knob_green = knob_green;
   }
 
-  //printf("I read: red=%d, green=%d, blue=%d.\n", (knobs >> 16) & 255, (knobs >> 8) & 255, knobs & 255);
   return res;
 }

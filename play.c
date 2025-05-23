@@ -58,6 +58,8 @@ int play() {
           if(selected.i > 0)
             selected.i--;
           break;
+        case 6:
+          break;
       }
 
       refresh_board(&board, buf, &selected, &under_constr);

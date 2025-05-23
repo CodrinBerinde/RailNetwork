@@ -110,12 +110,12 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
         i_char = UB + BW + i * (CH + BW) + (CH - city_size_font->height) / 2;
         if(city_size < 10) { //then there is a single character to be printed
           j_char = LB + BW + j * (CW + BW) + (CW - city_size_font->maxwidth) / 2;
-          char_buf(buf, i_char, j_char, city_size_font, 0, 0xffff, city_size + '0');
+          char_buf(buf, i_char, j_char, city_size_font, 0, CITY_SIZE_COLOR, city_size + '0');
         } else { //then there are two characters to print
           j_char = LB + BW + j * (CW + BW) + (CW - 2 * city_size_font->maxwidth) / 2;
-          char_buf(buf, i_char, j_char, city_size_font, 0, 0xffff, city_size/10 + '0');
+          char_buf(buf, i_char, j_char, city_size_font, 0, CITY_SIZE_COLOR, city_size/10 + '0');
           j_char += city_size_font->maxwidth;
-          char_buf(buf, i_char, j_char, city_size_font, 0, 0xffff, city_size%10 + '0');
+          char_buf(buf, i_char, j_char, city_size_font, 0, CITY_SIZE_COLOR, city_size%10 + '0');
         }
       }
     }

@@ -30,7 +30,8 @@
 #define LB 6 // left border - in pixels
 
 #define BORDER_COLOR 0xffff
-#define SELECTED_COLOR 0xffe0
+#define SELECTED_COLOR 0xf884
+#define CITY_SIZE_COLOR 0xffff
 
 typedef struct BUF {
   int width;

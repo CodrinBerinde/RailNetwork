@@ -12,6 +12,7 @@
  *******************************************************************/
 
 #include <stdlib.h>
+#include <time.h>
 
 #include "play.h"
 #include "events.h"
@@ -64,7 +65,7 @@ int play() {
       //clear_buf(buf, 0xffff);
       put_buffer(buf);
     }
-    //sleep(1);
+    sleep(20);
   }
 
   clear_mem_buffer(buf);

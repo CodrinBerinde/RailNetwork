@@ -107,6 +107,10 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
 
   //rectangle_buf(buf, 0, 0, 16, 16, 0xffff);
 
+  printf("selected cell is %d, %d, coordinates are %d, %d, %d, %d.\n", selected->i, selected->j, 
+      UB + BW + (CH + BW) * (selected->i), UB + BW + (CH + BW) * (selected->i) + CH,
+                LB + BW + (CW + BW) * (selected->j), LB + BW + (CW + BW) * (selected->j) + CW);
+
   rectangle_buf(buf, UB + BW + (CH + BW) * (selected->i), UB + BW + (CH + BW) * (selected->i) + CH,
                 LB + BW + (CW + BW) * (selected->j), LB + BW + (CW + BW) * (selected->j) + CW, 0xffff); //draw the selected cell
 

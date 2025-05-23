@@ -37,9 +37,6 @@ int play() {
   //fb_draw_empty_board();
   //fb_draw();
   while(1) {
-    
-    //here we attempt to read from SPILED knobs
-
 
     int event = listen_event();
     if(event != 0) {
@@ -60,7 +57,7 @@ int play() {
       refresh_board(&board, buf, &selected, &under_constr);
       put_buffer(buf);
     }
-    //sleep(1);
+    sleep(1);
   }
 
   clear_mem_buffer(buf);

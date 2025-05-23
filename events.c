@@ -32,6 +32,8 @@ void init_reading_constants() {
   prev_knob_green = (knobs >> 8) & 255;
   prev_knob_blue = knobs & 255;
   push_state = 0;
+
+  *(uint32_t *)(spiled_base + SPILED_REG_LED_LINE_o) = 13;
 }
 
 int listen_event() {

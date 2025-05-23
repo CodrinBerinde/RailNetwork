@@ -161,6 +161,9 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
     rectangle_buf(buf, i0, j0, i1, j1, UC_COLOR);
     
   }
+
+  //show the number of points on the LEDS
+  
 }
 
 void clear_mem_buffer(buf_t *buf) {

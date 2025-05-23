@@ -27,6 +27,6 @@ void init_reading_constants() {
 }
 
 int listen_event() {
-  printf("I read: %d.\n", *(uint16_t *)(spiled_base + SPILED_REG_KNOBS_8BIT_o));
+  printf("I read: %d.\n", *(uint32_t *)(spiled_base + SPILED_REG_KNOBS_8BIT_o));
   return 0;
 }

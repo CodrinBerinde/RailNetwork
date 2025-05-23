@@ -72,8 +72,12 @@ void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, uint1
     for(int pixel = 0; pixel < font->maxwidth; pixel++) {
       if((font->bits[font->height * ch + line] >> (font->maxwidth - pixel - 1)) & 1) {
         buf->data[(i + line) * PARLCD_WIDTH + pixel] = color;
+        printf("X");
       }
+      else
+        printf(" ");
     }
+    printf("\n");
   }
 }
 

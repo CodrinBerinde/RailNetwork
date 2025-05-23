@@ -62,7 +62,10 @@ int play() {
           break;
       }
 
-      refresh_board(&board, buf, &selected, &under_constr);
+      if(event == 6)
+        clear_buf(buf, 0);
+      else
+        refresh_board(&board, buf, &selected, &under_constr);
       put_buffer(buf);
       
     }

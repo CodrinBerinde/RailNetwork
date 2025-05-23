@@ -25,21 +25,25 @@
 int play() {
   uint16_t board_data[BOARD_HEIGHT * BOARD_WIDTH];
   board_t board = {board_data};
+  cell_t selected
   init_rendering_constants();
   buf_t *buf = init_buffer();
+  draw_initial_board(buf);
 
   generate(&board);
-  draw(&board, buf);
-
-  int event;
+  refresh_board(&board, buf);
+  put_buffer(buf);
 
   //fb_draw_empty_board();
   //fb_draw();
   while(1) {
     int event = listen_event();
     if(event != 0) {
-      draw(&board, buf);
+      refresh_board(&board, buf);
+      put_buffer(buf);
     }
     sleep(1);
   }
+
+  clear_mem_buffer(buf);
 }

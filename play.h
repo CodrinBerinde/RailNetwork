@@ -26,6 +26,10 @@ typedef struct BOARD {
   uint16_t *data;
 } board_t;
 
+typedef struct CELL {
+  int i, j;
+} cell_t;
+
 //returns 0 if the game is won, nonzero value otherwise
 int play();
 

@@ -61,8 +61,9 @@ void fb_rectangle(int x0, int y0, int w, int h, int color) {
 
 }
 
-int fb_char(int x0, int y0, font_descriptor_t *font, int size, int color, char ch) {
-
+//int fb_char(buf_t *buf, int i0, int j0, font_descriptor_t *font, int size, int color, char ch) {
+int fb_char(buf_t *buf, int i0, int j0, int color, char ch) {
+  
 }
 
 void fb_line(buf_t *buf, int dir, int x, int y1, int y2, uint16_t color) {
@@ -79,18 +80,28 @@ void fb_line(buf_t *buf, int dir, int x, int y1, int y2, uint16_t color) {
   }
 }
 
-void draw(board_t *board, buf_t *buf) {
+void draw_initial_board(buf_t *buf) {
   //first we draw the horizontal lines
   for(int i = 0; i <= BOARD_HEIGHT; i++) {
-    //fb_line(0, UB + i * (CH + BW), LB, 100, BORDER_COLOR);
     fb_line(buf, 0, UB + i * (CH + BW), LB, LB + BOARD_WIDTH * (CW + BW), BORDER_COLOR);
   }
-  //fb_line(0, 0, 0, PARLCD_WIDTH - 1, BORDER_COLOR);
 
   //then we draw the vertical lines
   for(int i = 0; i <= BOARD_WIDTH; i++) {
     fb_line(buf, 1, LB + i * (CW + BW), UB, UB + BOARD_HEIGHT * (CH + BW), BORDER_COLOR);
   }
+}
 
-  put_buffer(buf);
+void refresh_board(board_t *board, buf_t *buf) {
+  for(int i = 0; i < BOARD_HEIGHT; i++) {
+    for(int j = 0; j < BOARD_WIDTH; j++) {
+      if(((*(board->data[i * BOARD_WIDTH + j])) & 15) != 0)
+        int city_size = ((*(board->data[i * BOARD_WIDTH + j])) & 15);
+        fb_char(buf, UB + i * (CH + BW), LB + j * (CW + BW), 0xffff, city_size%10 + '0');
+    }
+  }
+}
+
+void clear_mem_buffer(buf_t *buf) {
+  free(buf);
 }

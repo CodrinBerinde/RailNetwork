@@ -24,8 +24,8 @@
 #define PARLCD_WIDTH 480
 #define PARLCD_HEIGHT 320
 #define BW 1 //border width - in pixels
-#define CW 16 // cell width - in pixels
-#define CH 16 // cell height - in pixels
+#define CW 24 // cell width - in pixels
+#define CH 24 // cell height - in pixels
 #define UB 6 // upper border - in pixels
 #define LB 6 // left border - in pixels
 

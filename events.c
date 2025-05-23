@@ -71,9 +71,10 @@ int listen_event() {
     return res;
   }
 
-  printf("%d.\n", (knobs >> 24));
+  
 
   if((knobs >> 24) & 1) { // the blue knob has been pushed
+    printf("YES YOU PUSHED THE GODDAMN BUTTON\n");
     return 6;
   }
 

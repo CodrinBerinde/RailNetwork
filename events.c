@@ -68,5 +68,7 @@ int listen_event() {
     prev_knob_green = knob_green;
   }
 
+  pritnf("Maybe it is %d.\n", (knobs >> 24));
+
   return res;
 }

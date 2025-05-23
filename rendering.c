@@ -12,6 +12,7 @@
  *******************************************************************/
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "play.h"
 #include "events.h"
@@ -67,7 +68,7 @@ void rectangle_buf(buf_t *buf, int i0, int j0, int i1, int j1, uint16_t color) {
 }
 
 void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, int color, char ch) {
-  
+  printf("%d.\n", font->bits[18]);
 }
 
 void draw_initial_board(buf_t *buf) {

@@ -12,6 +12,7 @@
  *******************************************************************/
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "play.h"
 #include "events.h"
@@ -68,7 +69,7 @@ int listen_event() {
     prev_knob_green = knob_green;
   }
 
-  pritnf("Maybe it is %d.\n", (knobs >> 24));
+  printf("Maybe it is %d.\n", (knobs >> 24));
 
   return res;
 }

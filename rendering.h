@@ -30,7 +30,7 @@
 #define LB 6 // left border - in pixels
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
-#define UCA (0.4 * MIN(CW, CH))
+#define UCA (0.35 * MIN(CW, CH))
 #define UCB (0.75 * UCA)
 #define UCAB (UCA - UCB)
 #define UCW 2

@@ -125,39 +125,39 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
   if(under_constr->i >= 0) {
     int i0, i1, j0, j1;
     i0 = UB + BW + under_constr->i * (CH + BW) + UCAB;
-    i1 = i0 + UCB;
+    i1 = i0 + UCB - 1;
     j0 = LB + BW + under_constr->j * (CW + BW) + UCA - UCW;
-    j1 = j0 + UCW;
+    j1 = j0 + UCW - 1;
     rectangle_buf(buf, i0, j0, i1, j1, UC_COLOR);
 
     i0 = i0 - UCAB + CH - UCA;
-    i1 = i1 - UCA + CH - UCAB;
+    i1 = i0 + UCB - 1;
     rectangle_buf(buf, i0, j0, i1, j1, UC_COLOR);
 
-    j0 = j0 - UCA + CW - UCA + UCW;
-    j1 = j1 - UCA + CW - UCA + UCW;
+    j0 = j0 + UCW - UCA + CW - UCA + UCW;
+    j1 = j0 + UCW - 1;
     rectangle_buf(buf, i0, j0, i1, j1, UC_COLOR);
 
     i0 = i0 + UCAB - CH + UCA;
-    i1 = i1 + UCA - CH + UCAB;
+    i1 = i0 + UCB - 1;
     rectangle_buf(buf, i0, j0, i1, j1, UC_COLOR);
 
     i0 = UB + BW + under_constr->i * (CH + BW) + UCA - UCW;
-    i1 = i0 + UCW;
-    j0 = LB + BW + under_constr->j * (CW + BW) + UCA - UCB;
-    j1 = j0 + UCB;
+    i1 = i0 + UCW - 1;
+    j0 = LB + BW + under_constr->j * (CW + BW) + UCAB;
+    j1 = j0 + UCB - 1;
     rectangle_buf(buf, i0, j0, i1, j1, UC_COLOR);
 
     i0 = i0 + UCW - UCA + CH - UCA;
-    i1 = i0 + UCW;
+    i1 = i0 + UCW - 1;
     rectangle_buf(buf, i0, j0, i1, j1, UC_COLOR);
 
     j0 = j0 - UCAB + CW - UCA;
-    j1 = j0 + UCB;
+    j1 = j0 + UCB - 1;
     rectangle_buf(buf, i0, j0, i1, j1, UC_COLOR);
 
     i0 = i0 + UCA - CH + UCA - UCW;
-    i1 = i0 + UCW;
+    i1 = i0 + UCW - 1;
     rectangle_buf(buf, i0, j0, i1, j1, UC_COLOR);
     
   }

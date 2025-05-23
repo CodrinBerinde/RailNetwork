@@ -101,7 +101,7 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
                 UB + BW + (CH + BW) * (selected->i) + CH - 1,
                 LB + BW + (CW + BW) * (selected->j) + CW - 1, SELECTED_COLOR); //draw the selected cell
 
-  //we draw the cities
+  //draw the cities
   for(int i = 0; i < BOARD_HEIGHT; i++) {
     for(int j = 0; j < BOARD_WIDTH; j++) {
       if(((board->data[i * BOARD_WIDTH + j]) & 15) != 0) {
@@ -119,6 +119,16 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
         }
       }
     }
+  }
+
+  //draw the under construction cell
+  if(under_constr->i >= 0) {
+    int i0, i1, j0, j1;
+    i0 = UB + BW + under_constr->i * (CH + BW) + UCA - UCB;
+    i1 = i0 + UCB;
+    j0 = LB + BW + under_constr->j * (CW + BW) + UCA - UCW;
+    j1 = j0 + UCW;
+    rectangle_buf(buf, i0, j0, i1, j1, UC_COLOR);
   }
 }
 

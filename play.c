@@ -58,6 +58,13 @@ int play() {
           if(selected.i > 0)
             selected.i--;
           break;
+        case 5:
+          if(under_constr.i < 0) {
+            under_constr.i = selected.i;
+            under_constr.j = selected.j;
+          } else {
+            under_constr.i = -1;
+          }
         case 6:
           break;
       }

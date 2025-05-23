@@ -29,6 +29,12 @@
 #define UB 6 // upper border - in pixels
 #define LB 6 // left border - in pixels
 
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define UCA 0.25 * MIN(CW, CH)
+#define UCB 0.8 * UCA
+#define UCW 3
+#define UC_COLOR 0x07e0//under construction color
+
 #define BORDER_COLOR 0xffff
 #define SELECTED_COLOR 0xf908
 #define CITY_SIZE_COLOR 0xffff

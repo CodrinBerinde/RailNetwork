@@ -55,7 +55,7 @@ int play() {
       }
 
       //refresh_board(&board, buf, &selected, &under_constr);
-      clear_buf(buf, 0);
+      clear_buf(buf, 0xffff);
       put_buffer(buf);
     }
     sleep(1);

@@ -27,6 +27,7 @@ void init_reading_constants() {
 }
 
 int listen_event() {
-  printf("I read: %d.\n", *(uint32_t *)(spiled_base + SPILED_REG_KNOBS_8BIT_o));
+  uint32_t knobs = *(uint32_t *)(spiled_base + SPILED_REG_KNOBS_8BIT_o);
+  printf("I read: red=%d, green=%d, blue=%d.\n", (knobs >> 16) & 255, (knobs >> 8) & 255, knobs & 255);
   return 0;
 }

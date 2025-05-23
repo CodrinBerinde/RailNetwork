@@ -74,7 +74,6 @@ int listen_event() {
   
 
   if((knobs >> 24) & 1) { // the blue knob has been pushed
-    printf("YES YOU PUSHED THE GODDAMN BUTTON\n");
     return 6;
   }
 

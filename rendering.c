@@ -91,8 +91,6 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
 
   draw_initial_board(buf); //draw the cells
 
-  printf("I print here cell %d %d.\n", selected->i, selected->j);
-
   rectangle_buf(buf, UB + BW + (CH + BW) * (selected->i), LB + BW + (CW + BW) * (selected->j),
                 UB + BW + (CH + BW) * (selected->i) + CH - 1,
                 LB + BW + (CW + BW) * (selected->j) + CW - 1, SELECTED_COLOR); //draw the selected cell

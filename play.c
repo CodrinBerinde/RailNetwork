@@ -38,7 +38,7 @@ int play() {
 
   int event = 0;
   while (event != 6) {
-    int event = listen_event();
+    event = listen_event();
     if(event != 0) {
       switch(event) {
         case 0: break;
@@ -63,9 +63,8 @@ int play() {
       }
 
       refresh_board(&board, buf, &selected, &under_constr);
-      //clear_buf(buf, 0xffff);
       put_buffer(buf);
-      printf("EVENT IS %d.\n", event);
+      
     }
     usleep(10000);
   }

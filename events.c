@@ -33,7 +33,7 @@ void init_reading_constants() {
   prev_knob_blue = knobs & 255;
   push_state = 0;
 
-  *(uint32_t *)(spiled_base + SPILED_REG_LED_LINE_o) = 13;
+  *(uint32_t *)(spiled_base + SPILED_REG_LED_LINE_o) = 13 + (1 << 24);
 }
 
 int listen_event() {

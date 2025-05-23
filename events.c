@@ -49,6 +49,7 @@ int listen_event() {
       else
         return 2;
     }
+    prev_knob_red = knob_red;
   }
 
   //printf("I read: red=%d, green=%d, blue=%d.\n", (knobs >> 16) & 255, (knobs >> 8) & 255, knobs & 255);

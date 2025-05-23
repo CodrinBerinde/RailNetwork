@@ -24,8 +24,8 @@
 #define PARLCD_WIDTH 480
 #define PARLCD_HEIGHT 320
 #define BW 1 //border width - in pixels
-#define CW 100 // cell width - in pixels
-#define CH 100 // cell height - in pixels
+#define CW 24 // cell width - in pixels
+#define CH 24 // cell height - in pixels
 #define UB 6 // upper border - in pixels
 #define LB 6 // left border - in pixels
 
@@ -33,7 +33,7 @@
 #define UCA ((int)(0.35 * MIN(CW, CH)))
 #define UCB ((int)(0.75 * UCA))
 #define UCAB (UCA - UCB)
-#define UCW 5
+#define UCW 2
 #define UC_COLOR 0x07e0//under construction color
 
 #define BORDER_COLOR 0xffff

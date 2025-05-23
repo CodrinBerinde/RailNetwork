@@ -53,6 +53,21 @@ int listen_event() {
     prev_knob_red = knob_red;
   }
 
+  if(knob_green != prev_knob_green) {
+    if(knob_green > prev_knob_green) {
+      if(knob_green - prev_knob_green < SAFETY_KNOB_DIFFERENCE) //it means that the knob moved up
+        res = 1;
+      else        //the knob moved down
+        res = 3;
+    } else {
+      if(prev_knob_green - knob_green < SAFETY_KNOB_DIFFERENCE) //it means that the knob moved down
+        res = 1;
+      else
+        res = 3;
+    }
+    prev_knob_green = knob_green;
+  }
+
   //printf("I read: red=%d, green=%d, blue=%d.\n", (knobs >> 16) & 255, (knobs >> 8) & 255, knobs & 255);
   return res;
 }

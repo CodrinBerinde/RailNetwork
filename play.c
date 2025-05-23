@@ -42,12 +42,18 @@ int play() {
     if(event != 0) {
       switch(event) {
         case 0: break;
-        case 1: break;
+        case 1:
+          if(selected.j < BOARD_WIDTH - 1)
+            selected.j++;
+          break;
         case 2:
           if(selected.i < BOARD_HEIGHT - 1)
             selected.i++;
           break;
-        case 3: break;
+        case 3:
+          if(selected.j > 0)
+            selected.j--;
+          break;
         case 4:
           if(selected.i > 0)
             selected.i--;
@@ -58,7 +64,7 @@ int play() {
       //clear_buf(buf, 0xffff);
       put_buffer(buf);
     }
-    sleep(1);
+    //sleep(1);
   }
 
   clear_mem_buffer(buf);

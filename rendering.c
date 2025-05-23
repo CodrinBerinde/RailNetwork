@@ -50,7 +50,7 @@ void put_buffer(buf_t *buf)
 void clear_buf(buf_t *buf, uint16_t color) {
   for(int i = 0; i < PARLCD_HEIGHT; i++) {
     for(int j = 0; j < PARLCD_WIDTH; j++) {
-      buf->data[i] = color;
+      buf->data[i * PARLCD_WIDTH + j] = color;
     }
   }
 }

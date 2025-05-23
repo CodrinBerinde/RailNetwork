@@ -33,7 +33,7 @@
 #define UCA (0.35 * MIN(CW, CH))
 #define UCB (0.75 * UCA)
 #define UCAB (UCA - UCB)
-#define UCW 2
+#define UCW 5
 #define UC_COLOR 0x07e0//under construction color
 
 #define BORDER_COLOR 0xffff

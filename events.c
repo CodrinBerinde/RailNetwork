@@ -52,6 +52,7 @@ int listen_event() {
         res = 2;
     }
     prev_knob_red = knob_red;
+    return res;
   }
 
   if(knob_green != prev_knob_green && knob_green % 4 == 0) {
@@ -67,15 +68,16 @@ int listen_event() {
         res = 1;
     }
     prev_knob_green = knob_green;
+    return res;
   }
 
   if((knobs >> 24) & 1) { // the blue knob has been pushed
-    res = 6;
+    return 6;
   }
 
   if((knobs >> 25)) { //either the red or the green knobs was pushed
-    res = 5;
+    return 5;
   }
 
-  return res;
+  return 0;
 }

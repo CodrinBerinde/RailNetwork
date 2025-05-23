@@ -69,16 +69,16 @@ void rectangle_buf(buf_t *buf, int i0, int j0, int i1, int j1, uint16_t color) {
 
 void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, uint16_t color, char ch) {
   for(unsigned int line = 0; line < font->height; line++) {
-    printf("tiparesc a %d-a valoare: %d\n", font->height * ch + line, font->bits[font->height * ch + line]);
+    //printf("tiparesc a %d-a valoare: %d\n", font->height * ch + line, font->bits[font->height * ch + line]);
     for(int pixel = 0; pixel < font->maxwidth; pixel++) {
-      if((font->bits[font->height * ch + line] >> (font->maxwidth - pixel - 1)) & 1) {
+      if(((font->bits[font->height * ch + line]) >> (15 - pixel)) & 1) {
         buf->data[(i + line) * PARLCD_WIDTH + pixel] = color;
-        //printf("X");
+        printf("X");
       }
-      //else
-        //printf(" ");
+      else
+        printf(" ");
     }
-    //printf("\n");
+    printf("\n");
   }
 }
 

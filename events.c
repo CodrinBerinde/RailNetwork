@@ -23,6 +23,7 @@
 
 void *spiled_base;
 uint32_t prev_knob_red, prev_knob_green, prev_knob_blue;
+int push_state;
 
 void init_reading_constants() {
   spiled_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE , 0);
@@ -30,6 +31,7 @@ void init_reading_constants() {
   prev_knob_red = (knobs >> 16) & 255;
   prev_knob_green = (knobs >> 8) & 255;
   prev_knob_blue = knobs & 255;
+  push_state = 0;
 }
 
 int listen_event() {
@@ -38,7 +40,6 @@ int listen_event() {
   uint32_t knob_red = (knobs >> 16) & 255;
   uint32_t knob_green = (knobs >> 8) & 255;
   uint32_t knob_blue = knobs & 255;
-  int push_state = 0;
 
   if(knob_red != prev_knob_red && knob_red % 4 == 0) {
     if(knob_red > prev_knob_red) {

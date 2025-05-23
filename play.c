@@ -65,6 +65,7 @@ int play() {
       refresh_board(&board, buf, &selected, &under_constr);
       //clear_buf(buf, 0xffff);
       put_buffer(buf);
+      printf("EVENT IS %d.\n", event);
     }
     usleep(10000);
   }

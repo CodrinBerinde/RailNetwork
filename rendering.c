@@ -71,8 +71,8 @@ void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, uint1
   for(unsigned int line = 0; line < font->height; line++) {
     //printf("tiparesc a %d-a valoare: %d\n", font->height * ch + line, font->bits[font->height * ch + line]);
     for(int pixel = 0; pixel < font->maxwidth; pixel++) {
-      if(((font->bits[font->height * ch + line]) >> (15 - pixel)) & 1) {
-        buf->data[(i + line) * PARLCD_WIDTH + pixel] = color;
+      if(((font->bits[font->height * ch + line]) >> (font->maxwidth - pixel - 1)) & 1) {
+        buf->data[(i + line) * PARLCD_WIDTH + pixel + j] = color;
         printf("X");
       }
       else

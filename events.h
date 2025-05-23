@@ -14,6 +14,8 @@
 #ifndef EVENTS_H
 #define EVENTS_H
 
+#define SAFETY_KNOB_DIFFERENCE 100
+
 //returns 0 if no event is caught, otherwise the code of the event as following:
 //  1 - move right
 //  2 - move down

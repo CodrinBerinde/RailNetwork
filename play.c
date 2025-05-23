@@ -43,6 +43,20 @@ int play() {
 
     int event = listen_event();
     if(event != 0) {
+      switch(event) {
+        case 0: break;
+        case 1: break;
+        case 2:
+          if(selected->i < BOARD_HEIGHT - 1)
+            selected->i++;
+          break;
+        case 3: break;
+        case 4:
+          if(selected->i > 0)
+            selected->i--;
+          break;
+      }
+
       refresh_board(&board, buf, &selected, &under_constr);
       put_buffer(buf);
     }

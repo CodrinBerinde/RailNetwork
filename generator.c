@@ -25,6 +25,7 @@ void generate(board_t *board) {
       board->data[i * BOARD_WIDTH + j] = 0;
     }
   }
-  //board->data[15] = 4;
-  //board->data[100] = 12;
+  board->data[15] = 4;
+  board->data[100] = 12;
+  board->data[113] = 9;
 }

@@ -67,8 +67,14 @@ void rectangle_buf(buf_t *buf, int i0, int j0, int i1, int j1, uint16_t color) {
   }
 }
 
-void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, int color, char ch) {
-  printf("%d.\n", font->bits[18]);
+void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, uint16_t color, char ch) {
+  for(unsigned int line = 0; line < font->height; line++) {
+    for(int pixel = 0; pixel < maxwidth; pixel++) {
+      if((font->bits[font->height * ch + line] >> (font->maxwidth - pixel - 1)) & 1) {
+        buf->data[(i + line) * PARLCD_WIDTH + pixel] = color;
+      }
+    }
+  }
 }
 
 void draw_initial_board(buf_t *buf) {
@@ -100,7 +106,6 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
         if(city_size < 10) { //then there is a single character to be printed
           char_buf(buf, UB + BW + i * (CH + BW), LB + BW + j * (CW + BW), &font_rom8x16, 0, 0xffff, city_size + '0');
         }
-        //fb_char(buf, UB + i * (CH + BW), LB + j * (CW + BW), 0xffff, city_size%10 + '0');
       }
     }
   }

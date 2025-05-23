@@ -38,6 +38,7 @@ int listen_event() {
   uint32_t knob_red = (knobs >> 16) & 255;
   uint32_t knob_green = (knobs >> 8) & 255;
   uint32_t knob_blue = knobs & 255;
+  int push_state = 0;
 
   if(knob_red != prev_knob_red && knob_red % 4 == 0) {
     if(knob_red > prev_knob_red) {
@@ -71,12 +72,18 @@ int listen_event() {
     return res;
   }
 
-  if((knobs >> 24) & 1) { // the blue knob has been pushed
+  if((knobs >> 24) & 1) { // the blue knob is pushed
     return 6;
   }
 
-  if((knobs >> 25)) { //either the red or the green knobs was pushed
-    return 5;
+  if((knobs >> 25)) { //either the red or the green knobs is pushed
+    if(push_state == 0) {
+      push_state = 1;
+      return 5;
+    } else {
+      if(push_state == 1)
+        push_state = 0;
+    }
   }
 
   return 0;

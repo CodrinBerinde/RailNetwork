@@ -80,10 +80,10 @@ int listen_event() {
     if(push_state == 0) {
       push_state = 1;
       return 5;
-    } else {
-      if(push_state == 1)
-        push_state = 0;
     }
+  } else {
+    if(push_state == 1)
+      push_state = 0;
   }
 
   return 0;

@@ -1,7 +1,7 @@
-This project was developed by Codrin Berinde, student at the Technical University of Cluj-Napoca
-  at the Czech Technical University in Prague, may 2025, during an Erasmus mobility
+This project was developed by Codrin Berinde, student at the Technical University of Cluj-Napoca,
+  at the Czech Technical University in Prague, may 2025, during an Erasmus mobility,
   as part of the semestrial assesment for the Computer Architectures course,
-  offered by the Faculty of Electrical Engineering
+  offered by the Faculty of Electrical Engineering.
 
 special thanks to the coordinating professor, Pavel Pisa.
 

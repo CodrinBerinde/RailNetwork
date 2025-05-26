@@ -76,11 +76,13 @@ void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, uint1
   else
     width = font->width[ch];
   for(unsigned int line = 0; line < font->height; line++) {
-    //printf("tiparesc a %d-a valoare: %d\n", font->height * ch + line, font->bits[font->height * ch + line]);
+      //printf("tiparesc a %d-a valoare: %d\n", font->height * ch + line, font->bits[font->height * ch + line]);
     for(int pixel = 0; pixel < size * width; pixel += size) {
       if(((font->bits[font->height * ch + line]) >> (15 - pixel)) & 1) {
-        for(int repeat = 0; repeat < size; repeat++)
-          buf->data[(i + line) * PARLCD_WIDTH + pixel + repeat + j] = color;
+        for(int repeat_col = 0; repeat_col < size; repeat_col++) {
+          for(int repeat_line = 0; repeat_line < size; repeat_line++)
+            buf->data[(i + size * line + repeat_line) * PARLCD_WIDTH + pixel + repeat_col + j] = color;
+        }
       }
     }
   }

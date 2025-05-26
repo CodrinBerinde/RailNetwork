@@ -81,6 +81,11 @@ int play() {
             under_constr.i = -1;
             break;
           }
+          if(under_constr.i == -1) {
+            under_constr.i = selected.i;
+            under_constr.j = selected.j;
+            break;
+          }
           int link = are_neighbours(&under_constr, &selected); //we test if the two cells are neighbouring
           if(link == -1)
             break;

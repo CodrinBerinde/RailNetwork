@@ -81,16 +81,11 @@ int play() {
             under_constr.i = -1;
             break;
           }
-          if(under_constr.i == -1) {
-            under_constr.i = selected.i;
-            under_constr.j = selected.j;
-            break;
-          }
           int link = are_neighbours(&under_constr, &selected); //we test if the two cells are neighbouring
-          if(link == -1)
-            break;
-          board.data[under_constr.i * BOARD_WIDTH + under_constr.j] |= (1 << (4 + link));
-          board.data[selected.i * BOARD_WIDTH + selected.j] |= (1 << (4 + (link + 2)%4));
+          if(link != -1) {
+            board.data[under_constr.i * BOARD_WIDTH + under_constr.j] |= (1 << (4 + link));
+            board.data[selected.i * BOARD_WIDTH + selected.j] |= (1 << (4 + (link + 2)%4));
+          }
           under_constr.i = selected.i;
           under_constr.j = selected.j;
         case 6:

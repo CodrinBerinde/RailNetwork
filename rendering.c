@@ -112,18 +112,22 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
   //draw the rails
   for(int i = 0; i < BOARD_HEIGHT; i++) {
     for(int j = 0; j < BOARD_WIDTH; j++) {
-      if((board->data[i * BOARD_WIDTH + j]) & (1 << 4)) //we draw rail to the right
+      if((board->data[i * BOARD_WIDTH + j]) & (1 << 4)) { //we draw rail to the right
         rectangle_buf(buf, UB + BW + (BW + CH) * i + (CH - RAIL_WIDTH) / 2, LB + BW + (BW + CW) * j + (CW - RAIL_WIDTH) / 2,
                           UB + BW + (BW + CH) * i + (CH + RAIL_WIDTH) / 2 - 1, LB + (BW + CW) * (j + 1) - 1, RAIL_COLOR);
-      if((board->data[i * BOARD_WIDTH + j]) & (1 << 5)) //we draw rail to the down
+      }
+      if((board->data[i * BOARD_WIDTH + j]) & (1 << 5)) { //we draw rail to the down
         rectangle_buf(buf, UB + BW + (BW + CH) * i + (CH - RAIL_WIDTH) / 2, LB + BW + (BW + CW) * j + (CW - RAIL_WIDTH) / 2,
                           UB + (BW + CH) * (i + 1) - 1, LB + BW + (BW + CW) * j + (CW + RAIL_WIDTH) / 2, RAIL_COLOR);
-      if((board->data[i * BOARD_WIDTH + j]) & (1 << 6)) //we draw rail to the left
+      }
+      if((board->data[i * BOARD_WIDTH + j]) & (1 << 6)) { //we draw rail to the left
         rectangle_buf(buf, UB + BW + (BW + CH) * i + (CH - RAIL_WIDTH) / 2, LB + BW + (BW + CW) * j,
                           UB + BW + (BW + CH) * i + (CH + RAIL_WIDTH) / 2 - 1, LB + BW + (BW + CW) * j + (CW + RAIL_WIDTH) / 2, RAIL_COLOR);
-      if((board->data[i * BOARD_WIDTH + j]) & (1 << 7)) //we draw rail to the up
+      }
+      if((board->data[i * BOARD_WIDTH + j]) & (1 << 7)) { //we draw rail to the up
         rectangle_buf(buf, UB + BW + (BW + CH) * i, LB + BW + (BW + CW) * j + (CW - RAIL_WIDTH) / 2,
                           UB + BW + (BW + CH) * i + (CH + RAIL_WIDTH) / 2 - 1, LB + BW + (BW + CW) * j + (CW + RAIL_WIDTH) / 2, RAIL_COLOR);
+      }
     }
   }
 

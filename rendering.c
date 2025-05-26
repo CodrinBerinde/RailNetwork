@@ -100,6 +100,52 @@ void draw_initial_board(buf_t *buf) {
   }
 }
 
+int distance(int i0, int j0, int i1, int j1, int result, int smaller) {
+  if((i0 - i1) * (i0 - i1) + (j0 - j1) * (j0 - j1) <= result * result) {
+    if(smaller)
+      return 1;
+    return 0;
+  }
+  if(smaller)
+    return 0;
+  return 1;
+}
+
+void draw_rail(buf_t *buf, int i, int j, int dir, int is_city) {
+  int temp;
+  switch(dir) {
+    case 0:
+      temp = is_city ? (LB + BW + (BW + CW) * j + CW / 2 + CITY_r) : (LB + BW + (BW + CW) * j + (CW - RAIL_WIDTH) / 2);
+      rectangle_buf(buf, UB + BW + (BW + CH) * i + (CH - RAIL_WIDTH) / 2, temp,
+                          UB + BW + (BW + CH) * i + (CH + RAIL_WIDTH) / 2 - 1, LB + (BW + CW) * (j + 1) - 1, RAIL_COLOR);
+      break;
+    case 1:
+      temp = is_city ? (UB + BW + (BW + CH) * i + CH / 2 + CITY_r) : (UB + BW + (BW + CH) * i + (CH - RAIL_WIDTH) / 2);
+      rectangle_buf(buf, temp, LB + BW + (BW + CW) * j + (CW - RAIL_WIDTH) / 2,
+                          UB + (BW + CH) * (i + 1) - 1, LB + BW + (BW + CW) * j + (CW + RAIL_WIDTH) / 2, RAIL_COLOR);
+      break;
+    case 2:
+      temp = is_city ? (LB + BW + (BW + CW) * j + CW / 2 - CITY_r) : (LB + BW + (BW + CW) * j + (CW + RAIL_WIDTH) / 2);
+      rectangle_buf(buf, UB + BW + (BW + CH) * i + (CH - RAIL_WIDTH) / 2, LB + BW + (BW + CW) * j,
+                          UB + BW + (BW + CH) * i + (CH + RAIL_WIDTH) / 2 - 1, temp - 1, RAIL_COLOR);
+      break;
+    case 3:
+      temp = is_city ? (UB + BW + (BW + CH) * i + CH / 2 - CITY_r) : (UB + BW + (BW + CH) * i + (CH + RAIL_WIDTH) / 2);
+      rectangle_buf(buf, UB + BW + (BW + CH) * i, LB + BW + (BW + CW) * j + (CW - RAIL_WIDTH) / 2,
+                          temp - 1, LB + BW + (BW + CW) * j + (CW + RAIL_WIDTH) / 2, RAIL_COLOR);
+      break;
+  }
+  if(is_city) { //we draw the circle around the city, by testing each pixel inside the cell
+    int i_middle = UB + BW + (BW + CH) * i + CH / 2, j_middle = LB + BW + (BW + CW) * j + CW / 2;
+    for(int ii = UB + BW + (BW + CH) * i; ii < UB + BW + (BW + CH) * i + CH; ii++) {
+      for(int jj = LB + BW + (BW + CW) * j; jj < LB + BW + (BW + CW) * j + CW; jj++) {
+        if(distance(ii, jj, i_middle, j_middle, CITY_r, 0), && distance(ii, jj, i_middle, j_middle, CITY_R, 1))
+          buf->data[ii * PARLCD_WIDTH + jj] = RAIL_COLOR;
+      }
+    }
+  }
+}
+
 void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_constr) {
   clear_buf(buf, 0); //clear the entire buffer
 
@@ -112,21 +158,9 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
   //draw the rails
   for(int i = 0; i < BOARD_HEIGHT; i++) {
     for(int j = 0; j < BOARD_WIDTH; j++) {
-      if((board->data[i * BOARD_WIDTH + j]) & (1 << 4)) { //we draw rail to the right
-        rectangle_buf(buf, UB + BW + (BW + CH) * i + (CH - RAIL_WIDTH) / 2, LB + BW + (BW + CW) * j + (CW - RAIL_WIDTH) / 2,
-                          UB + BW + (BW + CH) * i + (CH + RAIL_WIDTH) / 2 - 1, LB + (BW + CW) * (j + 1) - 1, RAIL_COLOR);
-      }
-      if((board->data[i * BOARD_WIDTH + j]) & (1 << 5)) { //we draw rail to the down
-        rectangle_buf(buf, UB + BW + (BW + CH) * i + (CH - RAIL_WIDTH) / 2, LB + BW + (BW + CW) * j + (CW - RAIL_WIDTH) / 2,
-                          UB + (BW + CH) * (i + 1) - 1, LB + BW + (BW + CW) * j + (CW + RAIL_WIDTH) / 2, RAIL_COLOR);
-      }
-      if((board->data[i * BOARD_WIDTH + j]) & (1 << 6)) { //we draw rail to the left
-        rectangle_buf(buf, UB + BW + (BW + CH) * i + (CH - RAIL_WIDTH) / 2, LB + BW + (BW + CW) * j,
-                          UB + BW + (BW + CH) * i + (CH + RAIL_WIDTH) / 2 - 1, LB + BW + (BW + CW) * j + (CW + RAIL_WIDTH) / 2, RAIL_COLOR);
-      }
-      if((board->data[i * BOARD_WIDTH + j]) & (1 << 7)) { //we draw rail to the up
-        rectangle_buf(buf, UB + BW + (BW + CH) * i, LB + BW + (BW + CW) * j + (CW - RAIL_WIDTH) / 2,
-                          UB + BW + (BW + CH) * i + (CH + RAIL_WIDTH) / 2 - 1, LB + BW + (BW + CW) * j + (CW + RAIL_WIDTH) / 2, RAIL_COLOR);
+      for(int dir = 0; dir < 4; dir++) {
+        if((board->data[i * BOARD_WIDTH + j]) & (1 << (dir + 4)))
+          draw_rail(buf, i, j, dir, (((board->data[i * BOARD_WIDTH + j]) & 15) != 0));
       }
     }
   }

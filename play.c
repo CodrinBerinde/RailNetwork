@@ -24,6 +24,24 @@
 #include "serialize_lock.h"
 #include "mzapo_parlcd.h"
 
+int are_neighbours(cell_t *a, cell_t *b) {
+  if(a->i == -1)
+    return -1;
+  if(a->i == b->i) {
+    if(a->j == b->j - 1)
+      return 0;
+    if(a->j == b->j + 1)
+      return 2;
+  }
+  if(a->j == b->j) {
+    if(a->i == b->i - 1)
+      return 1;
+    if(a->i == b->i + 1)
+      return 3;
+  }
+  return -1;
+}
+
 int play() {
   uint8_t board_data[BOARD_HEIGHT * BOARD_WIDTH];
   board_t board = {board_data};
@@ -58,13 +76,18 @@ int play() {
           if(selected.i > 0)
             selected.i--;
           break;
-        case 5:
-          if(under_constr.i < 0) {
-            under_constr.i = selected.i;
-            under_constr.j = selected.j;
-          } else {
-            under_constr.i = -1;
+        case 5: //it means that the current cell was pressed
+          if(under_constr == selected) {
+            under_constr->i = -1;
+            break;
           }
+          int link = are_neighbours(&under_constr, &selected); //we test if the two cells are neighbouring
+          if(link == -1)
+            break;
+          board->data[under_constr->i * BOARD_WIDTH + under_constr->j] |= (1 << (4 + link));
+          board->data[selected->i * BOARD_WIDTH + selected->j] |= (1 << (4 + (link + 2)%4));
+          under_constr.i = selected.i;
+          under_constr.j = selected.j;
         case 6:
           break;
       }

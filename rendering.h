@@ -56,7 +56,7 @@ void clear_buf(buf_t *buf, uint16_t color);
 
 void rectangle_buf(buf_t *buf, int x0, int y0, int x1, int y1, uint16_t color);
 
-void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, uint16_t color, char ch);
+void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, uint16_t color, int size, char ch);
 
 void draw_initial_board(buf_t *buf);
 

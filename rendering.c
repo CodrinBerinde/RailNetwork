@@ -69,10 +69,15 @@ void rectangle_buf(buf_t *buf, int i0, int j0, int i1, int j1, uint16_t color) {
   }
 }
 
-void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, uint16_t color, char ch) {
+void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, uint16_t color, int size, char ch) {
+  int width;
+  if(font->width == 0)
+    width = font->maxwidth;
+  else
+    width = font->width[ch];
   for(unsigned int line = 0; line < font->height; line++) {
     //printf("tiparesc a %d-a valoare: %d\n", font->height * ch + line, font->bits[font->height * ch + line]);
-    for(int pixel = 0; pixel < font->maxwidth; pixel++) {
+    for(int pixel = 0; pixel < width; pixel++) {
       if(((font->bits[font->height * ch + line]) >> (15 - pixel)) & 1) {
         buf->data[(i + line) * PARLCD_WIDTH + pixel + j] = color;
       }
@@ -100,6 +105,14 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
   rectangle_buf(buf, UB + BW + (CH + BW) * (selected->i), LB + BW + (CW + BW) * (selected->j),
                 UB + BW + (CH + BW) * (selected->i) + CH - 1,
                 LB + BW + (CW + BW) * (selected->j) + CW - 1, SELECTED_COLOR); //draw the selected cell
+
+  /* ADDED WITHOUT TESTING */
+
+  //draw the rails
+  
+
+
+  /* END OF ADDED WITHOUT TESTING */
 
   //draw the cities
   for(int i = 0; i < BOARD_HEIGHT; i++) {

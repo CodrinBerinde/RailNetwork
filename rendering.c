@@ -136,7 +136,7 @@ void draw_rail(buf_t *buf, int i, int j, int dir, int is_city) {
       break;
   }
   if(is_city) { //we draw the circle around the city, by testing each pixel inside the cell
-    int i_middle = UB + BW + (BW + CH) * i + CH / 2, j_middle = LB + BW + (BW + CW) * j + CW / 2;
+    int i_middle = UB + BW + (BW + CH) * i + CH / 2 - 1, j_middle = LB + BW + (BW + CW) * j + CW / 2 - 1;
     for(int ii = UB + BW + (BW + CH) * i; ii < UB + BW + (BW + CH) * i + CH; ii++) {
       for(int jj = LB + BW + (BW + CW) * j; jj < LB + BW + (BW + CW) * j + CW; jj++) {
         if(distance(ii, jj, i_middle, j_middle, CITY_r, 0) && distance(ii, jj, i_middle, j_middle, CITY_R, 1))

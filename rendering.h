@@ -31,8 +31,8 @@
 #define RAIL_WIDTH 6
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
-#define CITY_R ((int)(0.45 * MIN(CW, CH)))
-#define CITY_r ((int)(0.3 * MIN(CW, CH)))
+#define CITY_R ((int)(0.5 * MIN(CW, CH)))
+#define CITY_r ((int)(0.35 * MIN(CW, CH)))
 
 #define UCA ((int)(0.35 * MIN(CW, CH)))
 #define UCB ((int)(0.75 * UCA))

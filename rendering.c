@@ -69,7 +69,7 @@ void rectangle_buf(buf_t *buf, int i0, int j0, int i1, int j1, uint16_t color) {
   }
 }
 
-void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, uint16_t color, int size, char ch) {
+void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, uint16_t color, char ch) {
   int width;
   if(font->width == 0)
     width = font->maxwidth;
@@ -77,9 +77,10 @@ void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, uint1
     width = font->width[ch];
   for(unsigned int line = 0; line < font->height; line++) {
     //printf("tiparesc a %d-a valoare: %d\n", font->height * ch + line, font->bits[font->height * ch + line]);
-    for(int pixel = 0; pixel < width; pixel++) {
+    for(int pixel = 0; pixel < size * width; pixel += size) {
       if(((font->bits[font->height * ch + line]) >> (15 - pixel)) & 1) {
-        buf->data[(i + line) * PARLCD_WIDTH + pixel + j] = color;
+        for(int repeat = 0; repeat < size; repeat++)
+          buf->data[(i + line) * PARLCD_WIDTH + pixel + repeat + j] = color;
       }
     }
   }
@@ -123,12 +124,12 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
         i_char = UB + BW + i * (CH + BW) + (CH - city_size_font->height) / 2;
         if(city_size < 10) { //then there is a single character to be printed
           j_char = LB + BW + j * (CW + BW) + (CW - city_size_font->maxwidth) / 2;
-          char_buf(buf, i_char, j_char, city_size_font, 0, CITY_SIZE_COLOR, city_size + '0');
+          char_buf(buf, i_char, j_char, city_size_font, 2, CITY_SIZE_COLOR, city_size + '0');
         } else { //then there are two characters to print
           j_char = LB + BW + j * (CW + BW) + (CW - 2 * city_size_font->maxwidth) / 2;
-          char_buf(buf, i_char, j_char, city_size_font, 0, CITY_SIZE_COLOR, city_size/10 + '0');
+          char_buf(buf, i_char, j_char, city_size_font, 2, CITY_SIZE_COLOR, city_size/10 + '0');
           j_char += city_size_font->maxwidth;
-          char_buf(buf, i_char, j_char, city_size_font, 0, CITY_SIZE_COLOR, city_size%10 + '0');
+          char_buf(buf, i_char, j_char, city_size_font, 2, CITY_SIZE_COLOR, city_size%10 + '0');
         }
       }
     }

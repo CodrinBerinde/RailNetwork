@@ -28,7 +28,7 @@
 #define CH 24 // cell height - in pixels
 #define UB 6 // upper border - in pixels
 #define LB 6 // left border - in pixels
-#define RAIL_WIDTH
+#define RAIL_WIDTH 6
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define UCA ((int)(0.35 * MIN(CW, CH)))

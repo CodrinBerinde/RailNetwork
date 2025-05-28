@@ -24,6 +24,8 @@
 #include "serialize_lock.h"
 #include "mzapo_parlcd.h"
 
+void *spiled_base;
+
 int are_neighbours(cell_t *a, cell_t *b) {
   if(a->i == -1)
     return -1;
@@ -89,7 +91,7 @@ void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points
   (*points)--; //for the connection
 }
 
-int game(int points) {
+int game(int points, buf_t *buf) {
   uint8_t board_data[BOARD_HEIGHT * BOARD_WIDTH];
   int parent_vector[BOARD_HEIGHT * BOARD_WIDTH];
   
@@ -165,13 +167,12 @@ int game(int points) {
 }
 
 void play() {
-  void *spiled_base;
   int difficulty = 8;
   spiled_base = init_rendering_constants();
   init_reading_constants(spiled_base);
   buf_t *buf = init_buffer();
 
-  if(game(difficulty) == 0)
+  if(game(difficulty, buf) == 0)
     printf("Congratulations! You won!\n");
   else
     printf("You lost. Maybe next time.\n");

@@ -32,7 +32,7 @@ typedef struct CELL {
 } cell_t;
 
 //returns 0 if the game is won, nonzero value otherwise
-int game(int points);
+int game(int points, buf_t *buf);
 
 void play();
 

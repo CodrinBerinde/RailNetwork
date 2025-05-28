@@ -42,7 +42,7 @@ int are_neighbours(cell_t *a, cell_t *b) {
   return -1;
 }
 
-void unify(board_t *board, int i0, int j0, int i1, int j1, int *points, int *trees) {
+void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points, int *trees) {
   board->data[i0 * BOARD_WIDTH + j0] |= (1 << (4 + link));
   board->data[i1 * BOARD_WIDTH + j1] |= (1 << (4 + (link + 2)%4));
   int parent0 = board->parents[i0 * BOARD_WIDTH + j0], parent1 = board->parents[i1 * BOARD_WIDTH + j1];
@@ -131,7 +131,7 @@ int play(int points) {
           }
           int link = are_neighbours(&under_constr, &selected); //we test if the two cells are neighbouring
           if(link != -1) {
-            unify(&board, under_constr.i, under_constr.j, selected.i, selected.j, &points, &trees);
+            unify(&board, under_constr.i, under_constr.j, selected.i, selected.j, link, &points, &trees);
             if(trees == 1)
               return 0;
             if(points == 0)

@@ -36,6 +36,6 @@ int play(int points);
 
 int are_neighbours(cell_t *a, cell_t *b);
 
-void unify(board_t *board, int i0, int j0, int i1, int j1, int *points);
+void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points, int *trees);
 
 #endif

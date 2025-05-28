@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 
   printf("Hello world\n");
 
-  play();
+  play(20);
 
   printf("Goodbye world\n");
 

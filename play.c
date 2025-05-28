@@ -42,7 +42,7 @@ int are_neighbours(cell_t *a, cell_t *b) {
   return -1;
 }
 
-int play() {
+int play(int points) {
   uint8_t board_data[BOARD_HEIGHT * BOARD_WIDTH];
   void *spiled_base;
   board_t board = {board_data};
@@ -96,7 +96,7 @@ int play() {
       if(event == 6)
         clear_buf(buf, 0);
       else
-        refresh_board(&board, buf, &selected, &under_constr);
+        refresh_board(&board, buf, &selected, &under_constr, points);
       put_buffer(buf);
       
     }

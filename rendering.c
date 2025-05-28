@@ -32,7 +32,6 @@ void *init_rendering_constants() {
   parlcd_base = map_phys_address(PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE , 0);
   spiled_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE , 0);
   city_size_font = &font_rom8x16;
-  *(uint32_t *)(spiled_base + SPILED_REG_LED_LINE_o) = 13 + (1 << 24);
   return spiled_base;
 }
 
@@ -231,6 +230,8 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
   }
 
   //show the number of points on the LEDS
+  int led_display = (1 << points) - 1;
+  *(uint32_t *)(spiled_base + SPILED_REG_LED_LINE_o) = led_display;
   
 }
 

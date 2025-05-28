@@ -135,16 +135,6 @@ int play(int points) {
           int link = are_neighbours(&under_constr, &selected); //we test if the two cells are neighbouring
           if(link != -1) {
             unify(&board, under_constr.i, under_constr.j, selected.i, selected.j, link, &points, &trees);
-            if(trees == 1) {
-              clear_buf(buf, 0);
-              put_buffer(buf);
-              return 0;
-            }
-            if(points == 0) {
-              clear_buf(buf, 0);
-              put_buffer(buf);
-              return -1;
-            }
           }
           under_constr.i = selected.i;
           under_constr.j = selected.j;
@@ -152,6 +142,8 @@ int play(int points) {
           break;
       }
       
+      if(trees == 1)
+        points = 0;
       refresh_board(&board, buf, &selected, &under_constr, points);
       if(event == 6 || trees == 1 || points == 0)
         clear_buf(buf, 0);

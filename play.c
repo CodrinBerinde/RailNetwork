@@ -42,16 +42,63 @@ int are_neighbours(cell_t *a, cell_t *b) {
   return -1;
 }
 
+void unify(board_t *board, int i0, int j0, int i1, int j1, int *points, int *trees) {
+  board->data[i0 * BOARD_WIDTH + j0] |= (1 << (4 + link));
+  board->data[i1 * BOARD_WIDTH + j1] |= (1 << (4 + (link + 2)%4));
+  int parent0 = board->parents[i0 * BOARD_WIDTH + j0], parent1 = board->parents[i1 * BOARD_WIDTH + j1];
+  int size0 = 0, size1 = 0, pop0 = 0, pop1 = 0;
+  if(parent0 != parent1 && parent0 != 0 && parent1 != 0) {
+    (*trees)--;
+    //we count the size of tree and population for parent0
+    for(int i = 0; i < BOARD_HEIGHT; i++) {
+      for(int j = 0; j < BOARD_WIDTH; j++) {
+        if(((board->data[i * BOARD_WIDTH + j]) & (15)) != 0 && board->parents[i * BOARD_WIDTH + j] == parent0) {
+          size0++;
+          pop0 += (board->data[i * BOARD_WIDTH + j]) & (15);
+        }
+      }
+    }
+    //we count the size of tree and population for parent1
+    for(int i = 0; i < BOARD_HEIGHT; i++) {
+      for(int j = 0; j < BOARD_WIDTH; j++) {
+        if(((board->data[i * BOARD_WIDTH + j]) & (15)) != 0 && board->parents[i * BOARD_WIDTH + j] == parent1) {
+          size1++;
+          pop1 += (board->data[i * BOARD_WIDTH + j]) & (15);
+        }
+      }
+    }
+    if(size0 == 1)
+      (*points) += pop0;
+    if(size1 == 1)
+      (*points) += pop1;
+    //we write all cells with parent1 as parent0
+    for(int i = 0; i < BOARD_HEIGHT; i++) {
+      for(int j = 0; j < BOARD_WIDTH; j++) {
+        if(board->parents[i * BOARD_WIDTH + j] == parent1) {
+          board->parents[i * BOARD_WIDTH + j] = parent1;
+        }
+      }
+    }
+  } else if(parent1 == 0 && parent0 != 0) {
+    board->parents[i1 * BOARD_WIDTH + j1] = parent0;
+  } else if(parent1 != 0 && parent0 == 0) {
+    board->parents[i0 * BOARD_WIDTH + j0] = parent1;
+  }
+  (*points)--; //for the connection
+}
+
 int play(int points) {
   uint8_t board_data[BOARD_HEIGHT * BOARD_WIDTH];
+  int parent_vector[BOARD_HEIGHT * BOARD_WIDTH];
   void *spiled_base;
-  board_t board = {board_data};
+  int trees;
+  board_t board = {board_data, parent_vector};
   cell_t selected = {0, 0}, under_constr = {-1, 0};
   spiled_base = init_rendering_constants();
   init_reading_constants(spiled_base);
   buf_t *buf = init_buffer();
 
-  generate(&board);
+  generate(&board, &trees);
   refresh_board(&board, buf, &selected, &under_constr, points);
   put_buffer(buf);
 
@@ -84,8 +131,11 @@ int play(int points) {
           }
           int link = are_neighbours(&under_constr, &selected); //we test if the two cells are neighbouring
           if(link != -1) {
-            board.data[under_constr.i * BOARD_WIDTH + under_constr.j] |= (1 << (4 + link));
-            board.data[selected.i * BOARD_WIDTH + selected.j] |= (1 << (4 + (link + 2)%4));
+            unify(&board, under_constr.i, under_constr.j, selected.i, selected.j, &points, &trees);
+            if(trees == 1)
+              return 0;
+            if(points == 0)
+              return -1;
           }
           under_constr.i = selected.i;
           under_constr.j = selected.j;

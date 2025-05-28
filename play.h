@@ -24,6 +24,7 @@
 
 typedef struct BOARD {
   uint8_t *data;
+  int *parents;
 } board_t;
 
 typedef struct CELL {
@@ -34,5 +35,7 @@ typedef struct CELL {
 int play(int points);
 
 int are_neighbours(cell_t *a, cell_t *b);
+
+void unify(board_t *board, int i0, int j0, int i1, int j1, int *points);
 
 #endif

@@ -51,7 +51,10 @@ int main(int argc, char *argv[])
 
   printf("Hello world\n");
 
-  play(20);
+  if(play(20) == 0)
+    printf("Congratulations! You won!");
+  else
+    printf("You lost. Maybe next time");
 
   printf("Goodbye world\n");
 

@@ -152,12 +152,14 @@ int play(int points) {
           break;
       }
 
-      if(event == 6)
+      if(event == 6 || trees == 1 || points == 0)
         clear_buf(buf, 0);
-      else
-        refresh_board(&board, buf, &selected, &under_constr, points);
+      refresh_board(&board, buf, &selected, &under_constr, points);
       put_buffer(buf);
-      
+      if(trees == 1)
+        return 0;
+      if(points == 0)
+        return -1;
     }
     usleep(10000);
   }

@@ -46,12 +46,6 @@
 #define SELECTED_COLOR 0xf908
 #define CITY_SIZE_COLOR 0xffff
 
-typedef struct BUF {
-  int width;
-  int height;
-  uint16_t *data;
-} buf_t;
-
 void put_buffer(buf_t *buf);
 
 void *init_rendering_constants();

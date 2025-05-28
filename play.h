@@ -18,12 +18,9 @@
 #include "mzapo_regs.h"
 #include "serialize_lock.h"
 #include "mzapo_parlcd.h"
-//#include "rendering.h"
 
 #define BOARD_HEIGHT 12 // 12 rows of cells
 #define BOARD_WIDTH 18 // 18 columns of cells
-
-extern BUF buf_t;
 
 typedef struct BOARD {
   uint8_t *data;
@@ -33,6 +30,12 @@ typedef struct BOARD {
 typedef struct CELL {
   int i, j;
 } cell_t;
+
+typedef struct BUF {
+  int width;
+  int height;
+  uint16_t *data;
+} buf_t;
 
 //returns 0 if the game is won, nonzero value otherwise
 int game(int points, buf_t *buf);

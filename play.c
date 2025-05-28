@@ -44,10 +44,11 @@ int are_neighbours(cell_t *a, cell_t *b) {
 
 int play() {
   uint8_t board_data[BOARD_HEIGHT * BOARD_WIDTH];
+  void *spiled_base;
   board_t board = {board_data};
   cell_t selected = {0, 0}, under_constr = {-1, 0};
-  init_rendering_constants();
-  init_reading_constants();
+  spiled_base = init_rendering_constants();
+  init_reading_constants(spiled_base);
   buf_t *buf = init_buffer();
 
   generate(&board);

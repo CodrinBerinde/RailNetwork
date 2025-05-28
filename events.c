@@ -25,15 +25,13 @@ void *spiled_base;
 uint32_t prev_knob_red, prev_knob_green, prev_knob_blue;
 int push_state;
 
-void init_reading_constants() {
-  spiled_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE , 0);
+void init_reading_constants(void *spiled_base_param) {
+  spiled_base = spiled_base_param;
   uint32_t knobs = *(uint32_t *)(spiled_base + SPILED_REG_KNOBS_8BIT_o);
   prev_knob_red = (knobs >> 16) & 255;
   prev_knob_green = (knobs >> 8) & 255;
   prev_knob_blue = knobs & 255;
   push_state = 0;
-
-  *(uint32_t *)(spiled_base + SPILED_REG_LED_LINE_o) = 13 + (1 << 24);
 }
 
 int listen_event() {

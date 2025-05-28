@@ -137,10 +137,12 @@ int play(int points) {
             unify(&board, under_constr.i, under_constr.j, selected.i, selected.j, link, &points, &trees);
             if(trees == 1) {
               clear_buf(buf, 0);
+              put_buffer(buf);
               return 0;
             }
             if(points == 0) {
               clear_buf(buf, 0);
+              put_buffer(buf);
               return -1;
             }
           }

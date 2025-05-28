@@ -77,7 +77,7 @@ void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points
     for(int i = 0; i < BOARD_HEIGHT; i++) {
       for(int j = 0; j < BOARD_WIDTH; j++) {
         if(board->parents[i * BOARD_WIDTH + j] == parent1) {
-          board->parents[i * BOARD_WIDTH + j] = parent1;
+          board->parents[i * BOARD_WIDTH + j] = parent0;
         }
       }
     }

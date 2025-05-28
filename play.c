@@ -47,6 +47,7 @@ void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points
   board->data[i1 * BOARD_WIDTH + j1] |= (1 << (4 + (link + 2)%4));
   int parent0 = board->parents[i0 * BOARD_WIDTH + j0], parent1 = board->parents[i1 * BOARD_WIDTH + j1];
   int size0 = 0, size1 = 0, pop0 = 0, pop1 = 0;
+  printf("\tFor unification, parent0 is %d, parent1 is %d.\n", parent0, parent1);
   if(parent0 != parent1 && parent0 != 0 && parent1 != 0) {
     (*trees)--;
     //we count the size of tree and population for parent0
@@ -67,6 +68,7 @@ void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points
         }
       }
     }
+    printf("\t\tSize of tree 0 is %d, population %d, tree 1 is %d, population %d.\n", size0, pop0, size1, pop1);
     if(size0 == 1)
       (*points) += pop0;
     if(size1 == 1)

@@ -149,12 +149,10 @@ int game(int points, buf_t *buf) {
       
       put_buffer(buf);
       if(trees == 1) {
-        clear_mem_buffer(buf);
         return 0;
       }
         
       if(points == 0) {
-        clear_mem_buffer(buf);
         return -1;
       }
         
@@ -162,7 +160,6 @@ int game(int points, buf_t *buf) {
     usleep(10000);
   }
 
-  clear_mem_buffer(buf);
   return -1;
 }
 
@@ -194,4 +191,7 @@ void play() {
       }
     }
   }
+  clear_buf(buf, 0);
+  put_buffer(buf);
+  clear_mem_buffer(buf);
 }

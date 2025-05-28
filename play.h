@@ -18,10 +18,12 @@
 #include "mzapo_regs.h"
 #include "serialize_lock.h"
 #include "mzapo_parlcd.h"
-#include "rendering.h"
+//#include "rendering.h"
 
 #define BOARD_HEIGHT 12 // 12 rows of cells
 #define BOARD_WIDTH 18 // 18 columns of cells
+
+extern BUF buf_t;
 
 typedef struct BOARD {
   uint8_t *data;

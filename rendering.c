@@ -44,7 +44,7 @@ buf_t *init_buffer() {
 }
 
 void show_menu(int menu_row, buf_t *buf) {
-  clear(buf, 0);
+  clear_buf(buf, 0);
   rectangle_buf(buf, MENU_CORNER_I, MENU_CORNER_J, MENU_CORNER_I, MENU_CORNER_J + MENU_WIDTH, 0xffff);
   rectangle_buf(buf, MENU_CORNER_I, MENU_CORNER_J, MENU_CORNER_I + MENU_HEIGHT, MENU_CORNER_J, 0xffff);
   rectangle_buf(buf, MENU_CORNER_I + MENU_HEIGHT, MENU_CORNER_J, MENU_CORNER_I + MENU_HEIGHT, MENU_CORNER_J + MENU_WIDTH, 0xffff);

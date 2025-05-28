@@ -125,7 +125,7 @@ int play(int points) {
             selected.i--;
           break;
         case 5: //it means that the current cell was pressed
-          printf("We have %d trees.\n", trees);
+          printf("We have %d trees and %d points.\n", trees, points);
           if(under_constr.i == selected.i && under_constr.j == selected.j) {
             under_constr.i = -1;
             break;
@@ -133,10 +133,14 @@ int play(int points) {
           int link = are_neighbours(&under_constr, &selected); //we test if the two cells are neighbouring
           if(link != -1) {
             unify(&board, under_constr.i, under_constr.j, selected.i, selected.j, link, &points, &trees);
-            if(trees == 1)
+            if(trees == 1) {
+              clear_buf(buf, 0);
               return 0;
-            if(points == 0)
+            }
+            if(points == 0) {
+              clear_buf(buf, 0);
               return -1;
+            }
           }
           under_constr.i = selected.i;
           under_constr.j = selected.j;
@@ -155,4 +159,5 @@ int play(int points) {
   }
 
   clear_mem_buffer(buf);
+  return -1;
 }

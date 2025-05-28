@@ -69,9 +69,9 @@ void show_menu(int menu_row, buf_t *buf) {
     while((*p) != '\0') {
       char_buf(buf, i, j, menu_font, 2, MENU_TEXT_COLOR, (*p));
       if(menu_font->width == 0)
-        j += font->maxwidth;
+        j += menu_font->maxwidth;
       else
-        j += font->width[(*p)];
+        j += menu_font->width[(*p)];
       p++;
     }
   }

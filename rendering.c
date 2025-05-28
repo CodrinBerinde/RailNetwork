@@ -72,8 +72,8 @@ void show_menu(int menu_row, buf_t *buf) {
 }
 
 void write_final_message(buf_t *buf, int state) {
-  rectangle_buf(buf, (PARLCD_HEIGHT - FM_HEIGHT) / 2, (PARLCD_WIDTH - WIDTH) / 2,
-                     (PARLCD_HEIGHT + FM_HEIGHT) / 2, (PARLCD_WIDTH + WIDTH) / 2, FM_COLOR);
+  rectangle_buf(buf, (PARLCD_HEIGHT - FM_HEIGHT) / 2, (PARLCD_WIDTH - FM_WIDTH) / 2,
+                     (PARLCD_HEIGHT + FM_HEIGHT) / 2, (PARLCD_WIDTH + FM_WIDTH) / 2, FM_COLOR);
   char msg[2][20] = {"You won!", "You lost!"};
   int i, j, index;
   i = (PARLCD_HEIGHT - fm_font->height) / 2;

@@ -52,7 +52,7 @@ int play(int points) {
   buf_t *buf = init_buffer();
 
   generate(&board);
-  refresh_board(&board, buf, &selected, &under_constr);
+  refresh_board(&board, buf, &selected, &under_constr, points);
   put_buffer(buf);
 
   int event = 0;

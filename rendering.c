@@ -26,12 +26,13 @@
 
 unsigned char *parlcd_base;
 extern void *spiled_base;
-font_descriptor_t *city_size_font;
+font_descriptor_t *city_size_font, *menu_font;
 
 void init_rendering_constants() {
   parlcd_base = map_phys_address(PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE , 0);
   spiled_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE , 0);
   city_size_font = &font_rom8x16;
+  menu_font = &font_rom8x16;
 }
 
 buf_t *init_buffer() {
@@ -57,6 +58,26 @@ void show_menu(int menu_row, buf_t *buf) {
   //draw the selected row
   rectangle_buf(buf, MENU_CORNER_I + menu_row * MENU_ROW_HEIGHT + 1, MENU_CORNER_J + 1, 
                 MENU_CORNER_I + (menu_row + 1) * MENU_ROW_HEIGHT - 1, MENU_CORNER_J + MENU_WIDTH - 1, SELECTED_COLOR);
+
+  //now we write the text on the menu
+  char menu_options[4][] = {"Difficulty 1", "Difficulty 2", "Difficulty 3", "Exit"};
+  int i, j;
+  for(int k = 0; k < 4; k++) {
+    j = (PARLCD_WIDTH - (string_width(menu_font, menu_options[k], 2))) / 2;
+    i = MENU_CORNER_I + k * MENU_ROW_HEIGHT + (MENU_ROW_HEIGHT - menu_font->height) / 2;
+    char *p = menu_options[k];
+    while((*p) != '\0') {
+      char_buf(buf, i, j, menu_font, 2, MENU_TEXT_COLOR, (*p));
+      if(menu_font->width == 0)
+        j += font->maxwidth;
+      else
+        j += font->width[(*p)];
+      p++;
+    }
+  }
+  
+  
+  
 }
 
 void put_buffer(buf_t *buf)
@@ -127,6 +148,18 @@ int distance(int i0, int j0, int i1, int j1, int result, int smaller) {
   if(smaller)
     return 0;
   return 1;
+}
+
+int string_width(font_descriptor_t *font, char *str, int size) {
+  int length = 0, res = 0;
+  char *p = str;
+  while((*p) != '\0') p++, length++;
+  if(font->width == 0)
+    return length * font->maxwidth * size;
+  for(int i = 0; i < length; i++) {
+    res += font->width[str[i]] * size;
+  }
+  return res;
 }
 
 void draw_rail(buf_t *buf, int i, int j, int dir, int is_city) {

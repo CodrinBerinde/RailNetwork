@@ -46,9 +46,10 @@
 #define BORDER_COLOR 0xffff
 #define SELECTED_COLOR 0xf908
 #define CITY_SIZE_COLOR 0xffff
+#define MENU_TEXT_COLOR 0xffff
 
 #define MENU_WIDTH 300
-#define MENU_ROW_HEIGHT 20
+#define MENU_ROW_HEIGHT 35
 #define MENU_HEIGHT (4 * MENU_ROW_HEIGHT)
 #define MENU_CORNER_J ((int)((PARLCD_WIDTH - MENU_WIDTH) / 2))
 #define MENU_CORNER_I ((int)((PARLCD_HEIGHT - MENU_HEIGHT) / 2))
@@ -74,5 +75,7 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
 void show_menu(int menu_row, buf_t *buf);
 
 void clear_mem_buffer(buf_t *buf);
+
+int string_width(font_descriptor_t *font, char *str, int size);
 
 #endif

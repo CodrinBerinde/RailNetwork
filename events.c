@@ -36,7 +36,7 @@ void init_reading_constants(void *spiled_base_param) {
 
 int listen_event() {
   int res = 0;
-  uint32_t knobs = *(uint32_t *)(spiled_base + SPILED_REG_KNOBS_8BIT_o);
+  uint32_t knobs = *(uint32_t *)(spiled_base_e + SPILED_REG_KNOBS_8BIT_o);
   uint32_t knob_red = (knobs >> 16) & 255;
   uint32_t knob_green = (knobs >> 8) & 255;
   uint32_t knob_blue = knobs & 255;

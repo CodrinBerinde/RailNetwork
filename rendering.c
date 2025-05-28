@@ -115,7 +115,7 @@ void char_buf(buf_t *buf, int i, int j, font_descriptor_t *font, int size, uint1
   else
     width = font->width[ch];
   for(unsigned int line = 0; line < font->height; line++) {
-    for(int pixel = 0; pixel < width; pixel += size) {
+    for(int pixel = 0; pixel < width; pixel++) {
       if(((font->bits[font->height * ch + line]) >> (15 - pixel)) & 1) {
         for(int repeat_col = 0; repeat_col < size; repeat_col++) {
           for(int repeat_line = 0; repeat_line < size; repeat_line++)

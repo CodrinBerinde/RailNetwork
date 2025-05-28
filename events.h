@@ -23,7 +23,7 @@
 //  4 - move up
 //  5 - click cell
 //  6 - exit game
-void init_reading_constants(void *spiled_base_param);
+void init_reading_constants();
 
 int listen_event();
 

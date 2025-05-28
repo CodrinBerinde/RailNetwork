@@ -48,7 +48,7 @@
 
 void put_buffer(buf_t *buf);
 
-void *init_rendering_constants();
+void init_rendering_constants();
 
 buf_t *init_buffer();
 

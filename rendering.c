@@ -28,11 +28,10 @@ unsigned char *parlcd_base;
 extern void *spiled_base;
 font_descriptor_t *city_size_font;
 
-void *init_rendering_constants() {
+void init_rendering_constants() {
   parlcd_base = map_phys_address(PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE , 0);
   spiled_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE , 0);
   city_size_font = &font_rom8x16;
-  return spiled_base;
 }
 
 buf_t *init_buffer() {

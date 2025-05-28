@@ -47,6 +47,7 @@
 #define SELECTED_COLOR 0xf908
 #define CITY_SIZE_COLOR 0xffff
 #define MENU_TEXT_COLOR 0xffff
+#define MENU_TEXT_SIZE 2
 
 #define MENU_WIDTH 300
 #define MENU_ROW_HEIGHT 35
@@ -77,5 +78,7 @@ void show_menu(int menu_row, buf_t *buf);
 void clear_mem_buffer(buf_t *buf);
 
 int string_width(font_descriptor_t *font, char *str, int size);
+
+void str_buf(int i, int j, font_descriptor_t *font, char *str, int size, uint16_t color);
 
 #endif

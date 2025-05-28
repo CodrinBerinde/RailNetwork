@@ -65,19 +65,8 @@ void show_menu(int menu_row, buf_t *buf) {
   for(int k = 0; k < 4; k++) {
     j = (PARLCD_WIDTH - (string_width(menu_font, menu_options[k], 2))) / 2;
     i = MENU_CORNER_I + k * MENU_ROW_HEIGHT + (MENU_ROW_HEIGHT - menu_font->height) / 2;
-    char *p = menu_options[k];
-    while((*p) != '\0') {
-      char_buf(buf, i, j, menu_font, 2, MENU_TEXT_COLOR, (*p));
-      if(menu_font->width == 0)
-        j += 2 * menu_font->maxwidth;
-      else
-        j += 2 * menu_font->width[(*p)];
-      p++;
-    }
+    str_buf(i, j, menu_font, menu_options[k], MENU_TEXT_SIZE, MENU_TEXT_COLOR);
   }
-  
-  
-  
 }
 
 void put_buffer(buf_t *buf)
@@ -105,6 +94,18 @@ void rectangle_buf(buf_t *buf, int i0, int j0, int i1, int j1, uint16_t color) {
     for(int j = j0; j <= j1; j++) {
       buf->data[i * PARLCD_WIDTH + j] = color;
     }
+  }
+}
+
+void str_buf(int i, int j, font_descriptor_t *font, char *str, int size, uint16_t color) {
+  char *p = str;
+  while((*p) != '\0') {
+    char_buf(buf, i, j, font, size, color, (*p));
+    if(font->width == 0)
+      j += size * font->maxwidth;
+    else
+      j += size * font->width[(*p)];
+    p++;
   }
 }
 

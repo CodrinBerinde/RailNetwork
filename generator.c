@@ -18,7 +18,7 @@
 #include "rendering.h"
 #include "generator.h"
 
-void generate(board_t *board, int *cities) {
+int generate(board_t *board, int *cities) {
   //generate dummy board
   for(int i = 0; i < BOARD_HEIGHT; i++) {
     for(int j = 0; j < BOARD_WIDTH; j++) {
@@ -29,8 +29,12 @@ void generate(board_t *board, int *cities) {
   board->data[15] = 4;
   board->data[100] = 12;
   board->data[113] = 9;
+  board->data[182] = 5;
   board->parents[15] = 1;
   board->parents[100] = 2;
   board->parents[113] = 3;
-  (*cities) = 3;
+  board->parents[182] = 4;
+  (*cities) = 4;
+
+  return 7;
 }

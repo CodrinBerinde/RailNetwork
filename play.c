@@ -49,7 +49,6 @@ void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points
   board->data[i1 * BOARD_WIDTH + j1] |= (1 << (4 + (link + 2)%4));
   int parent0 = board->parents[i0 * BOARD_WIDTH + j0], parent1 = board->parents[i1 * BOARD_WIDTH + j1];
   int size0 = 0, size1 = 0, pop0 = 0, pop1 = 0;
-  printf("\tFor unification, parent0 is %d, parent1 is %d.\n", parent0, parent1);
   if(parent0 != parent1 && parent0 != 0 && parent1 != 0) {
     (*trees)--;
     //we count the size of tree and population for parent0
@@ -70,7 +69,6 @@ void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points
         }
       }
     }
-    printf("\t\tSize of tree 0 is %d, population %d, tree 1 is %d, population %d.\n", size0, pop0, size1, pop1);
     if(size0 == 1)
       (*points) += pop0;
     if(size1 == 1)
@@ -91,7 +89,7 @@ void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points
   (*points)--; //for the connection
 }
 
-int game(int points, buf_t *buf) {
+int game(int difficulty, buf_t *buf) {
   uint8_t board_data[BOARD_HEIGHT * BOARD_WIDTH];
   int parent_vector[BOARD_HEIGHT * BOARD_WIDTH];
   
@@ -99,7 +97,7 @@ int game(int points, buf_t *buf) {
   board_t board = {board_data, parent_vector};
   cell_t selected = {0, 0}, under_constr = {-1, 0};
 
-  generate(&board, &trees);
+  int points = generate(&board, &trees) + 3 - difficulty;
   refresh_board(&board, buf, &selected, &under_constr, points);
   put_buffer(buf);
 
@@ -126,7 +124,6 @@ int game(int points, buf_t *buf) {
             selected.i--;
           break;
         case 5: //it means that the current cell was pressed
-          printf("We have %d trees and %d points.\n", trees, points);
           if(under_constr.i == selected.i && under_constr.j == selected.j) {
             under_constr.i = -1;
             break;

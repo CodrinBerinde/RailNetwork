@@ -16,6 +16,6 @@
 
 #include "play.h"
 
-void generate(board_t *board, int *cities);
+int generate(board_t *board, int *cities);
 
 #endif

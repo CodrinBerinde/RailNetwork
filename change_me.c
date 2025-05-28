@@ -35,7 +35,6 @@
 
 int main(int argc, char *argv[])
 {
-  int difficulty = 8;
   /* Serialize execution of applications */
 
   /* Try to acquire lock the first */

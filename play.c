@@ -166,6 +166,7 @@ int game(int points) {
 
 void play() {
   void *spiled_base;
+  int difficulty = 8;
   spiled_base = init_rendering_constants();
   init_reading_constants(spiled_base);
   buf_t *buf = init_buffer();

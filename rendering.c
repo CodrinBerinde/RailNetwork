@@ -43,6 +43,22 @@ buf_t *init_buffer() {
   return buf;
 }
 
+void show_menu(int menu_row, buf_t *buf) {
+  clear(buf, 0);
+  rectangle_buf(buf, MENU_CORNER_I, MENU_CORNER_J, MENU_CORNER_I, MENU_CORNER_J + MENU_WIDTH, 0xffff);
+  rectangle_buf(buf, MENU_CORNER_I, MENU_CORNER_J, MENU_CORNER_I + MENU_HEIGHT, MENU_CORNER_J, 0xffff);
+  rectangle_buf(buf, MENU_CORNER_I + MENU_HEIGHT, MENU_CORNER_J, MENU_CORNER_I + MENU_HEIGHT, MENU_CORNER_J + MENU_WIDTH, 0xffff);
+  rectangle_buf(buf, MENU_CORNER_I, MENU_CORNER_J + MENU_WIDTH, MENU_CORNER_I + MENU_HEIGHT, MENU_CORNER_J + MENU_WIDTH, 0xffff);
+
+  rectangle_buf(buf, MENU_CORNER_I + MENU_ROW_HEIGHT, MENU_CORNER_J, MENU_CORNER_I + MENU_ROW_HEIGHT, MENU_CORNER_J + MENU_WIDTH, 0xffff);
+  rectangle_buf(buf, MENU_CORNER_I + 2*MENU_ROW_HEIGHT, MENU_CORNER_J, MENU_CORNER_I + 2*MENU_ROW_HEIGHT, MENU_CORNER_J + MENU_WIDTH, 0xffff);
+  rectangle_buf(buf, MENU_CORNER_I + 3*MENU_ROW_HEIGHT, MENU_CORNER_J, MENU_CORNER_I + 3*MENU_ROW_HEIGHT, MENU_CORNER_J + MENU_WIDTH, 0xffff);
+
+  //draw the selected row
+  rectangle_buf(buf, MENU_CORNER_I + menu_row * MENU_ROW_HEIGHT + 1, MENU_CORNER_J + 1, 
+                MENU_CORNER_I + (menu_row + 1) * MENU_ROW_HEIGHT - 1, MENU_CORNER_J + MENU_WIDTH - 1, SELECTED_COLOR);
+}
+
 void put_buffer(buf_t *buf)
 {
   uint16_t* p = buf->data;

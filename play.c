@@ -167,13 +167,31 @@ int game(int points, buf_t *buf) {
 }
 
 void play() {
-  int difficulty = 8;
   init_rendering_constants();
   init_reading_constants();
   buf_t *buf = init_buffer();
 
-  if(game(difficulty, buf) == 0)
-    printf("Congratulations! You won!\n");
-  else
-    printf("You lost. Maybe next time.\n");
+  int opt = 0, win;
+  int menu_row = 0;
+  while(opt != 6) {
+    show_menu(menu_row, buf);
+    put_buffer(buf);
+    opt = listen_event();
+    if(opt == 1 || opt == 2) {
+      if(menu_row < 3)
+        menu_row++;
+    }
+    if(opt == 3 || opt == 4) {
+      if(menu_row > 0)
+        menu_row--;
+    }
+    if(opt == 5) {
+      if(menu_row == 3)
+        opt = 6;
+      else {
+        win = game(menu_row + 1, buf);
+        opt = 0;
+      }
+    }
+  }
 }

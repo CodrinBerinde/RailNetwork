@@ -24,6 +24,7 @@
 
 #define PARLCD_WIDTH 480
 #define PARLCD_HEIGHT 320
+
 #define BW 1 //border width - in pixels
 #define CW 24 // cell width - in pixels
 #define CH 24 // cell height - in pixels
@@ -63,6 +64,8 @@ void draw_initial_board(buf_t *buf);
 int distance(int i0, int j0, int i1, int j1, int result, int smaller);
 
 void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_constr, int points);
+
+void show_menu(int menu_row, buf_t *buf);
 
 void clear_mem_buffer(buf_t *buf);
 

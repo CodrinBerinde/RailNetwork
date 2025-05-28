@@ -67,7 +67,7 @@ void draw_initial_board(buf_t *buf);
 
 int distance(int i0, int j0, int i1, int j1, int result, int smaller);
 
-void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_constr);
+void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_constr, int points);
 
 void clear_mem_buffer(buf_t *buf);
 

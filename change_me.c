@@ -35,7 +35,7 @@
 
 int main(int argc, char *argv[])
 {
-
+  int difficulty = 8;
   /* Serialize execution of applications */
 
   /* Try to acquire lock the first */
@@ -51,10 +51,7 @@ int main(int argc, char *argv[])
 
   printf("Hello world\n");
 
-  if(play(8) == 0)
-    printf("Congratulations! You won!\n");
-  else
-    printf("You lost. Maybe next time.\n");
+  play();
 
   printf("Goodbye world\n");
 

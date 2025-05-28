@@ -32,7 +32,9 @@ typedef struct CELL {
 } cell_t;
 
 //returns 0 if the game is won, nonzero value otherwise
-int play(int points);
+int game(int points);
+
+void play();
 
 int are_neighbours(cell_t *a, cell_t *b);
 

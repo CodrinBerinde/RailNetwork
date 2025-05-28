@@ -25,7 +25,7 @@
 #include "font_types.h"
 
 unsigned char *parlcd_base;
-//void *spiled_base;
+extern void *spiled_base;
 font_descriptor_t *city_size_font;
 
 void *init_rendering_constants() {

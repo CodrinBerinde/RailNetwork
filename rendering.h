@@ -79,6 +79,6 @@ void clear_mem_buffer(buf_t *buf);
 
 int string_width(font_descriptor_t *font, char *str, int size);
 
-void str_buf(int i, int j, font_descriptor_t *font, char *str, int size, uint16_t color);
+void str_buf(buf_t *buf, int i, int j, font_descriptor_t *font, char *str, int size, uint16_t color);
 
 #endif

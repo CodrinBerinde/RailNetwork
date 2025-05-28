@@ -21,13 +21,13 @@
 #include "mzapo_phys.h"
 #include "mzapo_regs.h"
 
-void *spiled_base;
+void *spiled_base_e;
 uint32_t prev_knob_red, prev_knob_green, prev_knob_blue;
 int push_state;
 
 void init_reading_constants(void *spiled_base_param) {
-  spiled_base = spiled_base_param;
-  uint32_t knobs = *(uint32_t *)(spiled_base + SPILED_REG_KNOBS_8BIT_o);
+  spiled_base_e = spiled_base_param;
+  uint32_t knobs = *(uint32_t *)(spiled_base_e + SPILED_REG_KNOBS_8BIT_o);
   prev_knob_red = (knobs >> 16) & 255;
   prev_knob_green = (knobs >> 8) & 255;
   prev_knob_blue = knobs & 255;

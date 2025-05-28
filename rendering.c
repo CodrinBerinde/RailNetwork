@@ -149,7 +149,7 @@ void draw_rail(buf_t *buf, int i, int j, int dir, int is_city) {
   }
 }
 
-void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_constr) {
+void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_constr, int points) {
   clear_buf(buf, 0); //clear the entire buffer
 
   draw_initial_board(buf); //draw the cells

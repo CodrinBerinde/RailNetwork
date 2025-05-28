@@ -60,7 +60,7 @@ void show_menu(int menu_row, buf_t *buf) {
                 MENU_CORNER_I + (menu_row + 1) * MENU_ROW_HEIGHT - 1, MENU_CORNER_J + MENU_WIDTH - 1, SELECTED_COLOR);
 
   //now we write the text on the menu
-  char menu_options[4][] = {"Difficulty 1", "Difficulty 2", "Difficulty 3", "Exit"};
+  char menu_options[4][20] = {"Difficulty 1", "Difficulty 2", "Difficulty 3", "Exit"};
   int i, j;
   for(int k = 0; k < 4; k++) {
     j = (PARLCD_WIDTH - (string_width(menu_font, menu_options[k], 2))) / 2;

@@ -22,12 +22,6 @@
 #define BOARD_HEIGHT 12 // 12 rows of cells
 #define BOARD_WIDTH 18 // 18 columns of cells
 
-#define MENU_WIDTH 300
-#define MENU_ROW_HEIGHT 100
-#define MENU_HEIGHT (4 * MENU_ROW_HEIGHT)
-#define MENU_CORNER_J ((int)((PARLCD_WIDTH - MENU_WIDTH) / 2))
-#define MENU_CORNER_I ((int)((PARLCD_HEIGHT - MENU_HEIGHT) / 2))
-
 typedef struct BOARD {
   uint8_t *data;
   int *parents;

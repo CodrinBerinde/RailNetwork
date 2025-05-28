@@ -125,6 +125,7 @@ int play(int points) {
             selected.i--;
           break;
         case 5: //it means that the current cell was pressed
+          printf("We have %d trees.\n", trees);
           if(under_constr.i == selected.i && under_constr.j == selected.j) {
             under_constr.i = -1;
             break;

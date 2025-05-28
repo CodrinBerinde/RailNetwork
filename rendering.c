@@ -13,6 +13,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 #include "play.h"
 #include "events.h"
@@ -26,13 +27,14 @@
 
 unsigned char *parlcd_base;
 extern void *spiled_base;
-font_descriptor_t *city_size_font, *menu_font;
+font_descriptor_t *city_size_font, *menu_font, *fm_font;
 
 void init_rendering_constants() {
   parlcd_base = map_phys_address(PARLCD_REG_BASE_PHYS, PARLCD_REG_SIZE , 0);
   spiled_base = map_phys_address(SPILED_REG_BASE_PHYS, SPILED_REG_SIZE , 0);
   city_size_font = &font_rom8x16;
   menu_font = &font_rom8x16;
+  fm_font = &font_rom8x16;
 }
 
 buf_t *init_buffer() {
@@ -67,6 +69,22 @@ void show_menu(int menu_row, buf_t *buf) {
     i = MENU_CORNER_I + k * MENU_ROW_HEIGHT + (MENU_ROW_HEIGHT - menu_font->height) / 2;
     str_buf(buf, i, j, menu_font, menu_options[k], MENU_TEXT_SIZE, MENU_TEXT_COLOR);
   }
+}
+
+void write_final_message(buf_t *buf, int state) {
+  rectangle_buf(buf, (PARLCD_HEIGHT - FM_HEIGHT) / 2, (PARLCD_WIDTH - WIDTH) / 2,
+                     (PARLCD_HEIGHT + FM_HEIGHT) / 2, (PARLCD_WIDTH + WIDTH) / 2, FM_COLOR);
+  char msg[2][20] = {"You won!", "You lost!"};
+  int i, j, index;
+  i = (PARLCD_HEIGHT - fm_font->height) / 2;
+  if(state == 0)
+    index = 0;
+  else
+    index = 1;
+  j = (PARLCD_WIDTH - string_width(fm_font, msg[index], FM_TEXT_SIZE)) / 2;
+  str_buf(buf, i, j, fm_font, msg[index], FM_TEXT_SIZE, FM_TEXT_COLOR);
+  put_buffer(buf);
+  usleep(2000000);
 }
 
 void put_buffer(buf_t *buf)

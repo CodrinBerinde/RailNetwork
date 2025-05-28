@@ -187,6 +187,7 @@ void play() {
         opt = 6;
       else {
         win = game(menu_row + 1, buf);
+        write_final_message(buf, win);
         opt = 0;
       }
     }

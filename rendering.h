@@ -49,8 +49,14 @@
 #define MENU_TEXT_COLOR 0xffff
 #define MENU_TEXT_SIZE 2
 
-#define MENU_WIDTH 300
-#define MENU_ROW_HEIGHT 35
+#define FM_WIDTH 250
+#define FM_HEIGHT 100
+#define FM_COLOR 0xffe0
+#define FM_TEXT_SIZE 3
+#define FM_TEXT_COLOR 0x001f
+
+#define MENU_WIDTH 250
+#define MENU_ROW_HEIGHT 40
 #define MENU_HEIGHT (4 * MENU_ROW_HEIGHT)
 #define MENU_CORNER_J ((int)((PARLCD_WIDTH - MENU_WIDTH) / 2))
 #define MENU_CORNER_I ((int)((PARLCD_HEIGHT - MENU_HEIGHT) / 2))
@@ -62,6 +68,8 @@ void init_rendering_constants();
 buf_t *init_buffer();
 
 void clear_buf(buf_t *buf, uint16_t color);
+
+void write_final_message(buf_t *buf, int state);
 
 void rectangle_buf(buf_t *buf, int x0, int y0, int x1, int y1, uint16_t color);
 

@@ -23,13 +23,14 @@ void generate(board_t *board, int *cities) {
   for(int i = 0; i < BOARD_HEIGHT; i++) {
     for(int j = 0; j < BOARD_WIDTH; j++) {
       board->data[i * BOARD_WIDTH + j] = 0;
+      board->parents[i * BOARD_WIDTH + j] = 0;
     }
   }
   board->data[15] = 4;
   board->data[100] = 12;
   board->data[113] = 9;
   board->parents[15] = 1;
-  board->data[100] = 2;
-  board->data[113] = 3;
+  board->parents[100] = 2;
+  board->parents[113] = 3;
   (*cities) = 3;
 }

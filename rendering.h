@@ -20,6 +20,7 @@
 #include "serialize_lock.h"
 #include "mzapo_parlcd.h"
 #include "font_types.h"
+#include "play.h"
 
 #define PARLCD_WIDTH 480
 #define PARLCD_HEIGHT 320

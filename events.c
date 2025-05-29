@@ -35,6 +35,10 @@ void init_reading_constants() {
 }
 
 int listen_event() {
+  if(push_state_blue == 1)
+    printf("BLUE PUSHED.\n");
+  else
+    printf("BLUE NOT PUSHED.\n");
   int res = 0;
   uint32_t knobs = *(uint32_t *)(spiled_base + SPILED_REG_KNOBS_8BIT_o);
   uint32_t knob_red = (knobs >> 16) & 255;

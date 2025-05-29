@@ -150,7 +150,7 @@ int game(int difficulty, buf_t *buf) {
       }
         
       if(points == 0) {
-        return -1;
+        return 1;
       }
         
     }
@@ -161,16 +161,21 @@ int game(int difficulty, buf_t *buf) {
 }
 
 void play() {
+  srand(time(NULL));
   init_rendering_constants();
   init_reading_constants();
   buf_t *buf = init_buffer();
 
   int opt = 0, win;
   int menu_row = 0;
+  show_menu(menu_row, buf);
+  put_buffer(buf);
   while(opt != 6) {
-    show_menu(menu_row, buf);
-    put_buffer(buf);
     opt = listen_event();
+    if(opt >= 1 && opt <= 4) {
+      show_menu(menu_row, buf);
+      put_buffer(buf);
+    }
     if(opt == 1 || opt == 2) {
       if(menu_row < 3)
         menu_row++;
@@ -184,7 +189,8 @@ void play() {
         opt = 6;
       else {
         win = game(menu_row + 1, buf);
-        write_final_message(buf, win);
+        if(win != -1)
+          write_final_message(buf, win);
         opt = 0;
       }
     }

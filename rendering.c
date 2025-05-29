@@ -85,6 +85,8 @@ void write_final_message(buf_t *buf, int state) {
   str_buf(buf, i, j, fm_font, msg[index], FM_TEXT_SIZE, FM_TEXT_COLOR);
   put_buffer(buf);
   usleep(2000000);
+  clear_buf(buf, 0);
+  put_buffer(buf);
 }
 
 void put_buffer(buf_t *buf)

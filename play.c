@@ -49,6 +49,8 @@ void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points
   board->data[i1 * BOARD_WIDTH + j1] |= (1 << (4 + (link + 2)%4));
   int parent0 = board->parents[i0 * BOARD_WIDTH + j0], parent1 = board->parents[i1 * BOARD_WIDTH + j1];
   int size0 = 0, size1 = 0, pop0 = 0, pop1 = 0;
+  if(parent0 != parent1)
+    (*points)--; //for the connection
   if(parent0 != parent1 && parent0 != 0 && parent1 != 0) {
     (*trees)--;
     //we count the size of tree and population for parent0
@@ -86,7 +88,6 @@ void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points
   } else if(parent1 != 0 && parent0 == 0) {
     board->parents[i0 * BOARD_WIDTH + j0] = parent1;
   }
-  (*points)--; //for the connection
 }
 
 int game(int difficulty, buf_t *buf) {

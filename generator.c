@@ -25,7 +25,7 @@ typedef struct PREDEF_BOARD {
 } predef_board_t;
 
 predef_board_t boards[15] = {
-    { .initial_points = 3, .cities = 8, .i = (int[]){1,9,7,4,2,2,2,10}, .j = (int[]){12,7,17,6,0,9,12,12}, .pop = (int[]){2,14,14,6,5,2,6,14} },
+    { .initial_points = 6, .cities = 8, .i = (int[]){1,9,7,4,2,2,2,10}, .j = (int[]){12,7,17,6,0,9,12,12}, .pop = (int[]){2,14,14,6,5,2,6,14} },
     { .initial_points = 4, .cities = 5, .i = (int[]){7,1,10,6,1}, .j = (int[]){16,8,7,17,7}, .pop = (int[]){13,5,7,5,1} },
     { .initial_points = 6, .cities = 7, .i = (int[]){3,8,5,0,11,10,1}, .j = (int[]){1,5,9,16,17,0,12}, .pop = (int[]){12,5,6,14,9,5,8} },
     { .initial_points = 7, .cities = 8, .i = (int[]){10,0,8,2,4,7,1,6}, .j = (int[]){6,17,0,7,11,14,3,8}, .pop = (int[]){9,5,8,3,11,5,4,6} },
@@ -39,7 +39,7 @@ predef_board_t boards[15] = {
     { .initial_points = 5, .cities = 6, .i = (int[]){0,3,11,2,8,5}, .j = (int[]){9,5,12,15,7,1}, .pop = (int[]){9,8,10,5,6,3} },
     { .initial_points = 6, .cities = 7, .i = (int[]){4,10,1,0,3,6,5}, .j = (int[]){14,9,3,13,6,1,7}, .pop = (int[]){5,13,10,12,4,6,2} },
     { .initial_points = 6, .cities = 5, .i = (int[]){2,8,1,11,7}, .j = (int[]){12,6,1,4,13}, .pop = (int[]){6,14,7,11,8} },
-    { .initial_points = 3, .cities = 7, .i = (int[]){5,2,11,4,1,6,0}, .j = (int[]){2,10,14,7,16,12,6}, .pop = (int[]){4,7,13,9,6,5,2} }
+    { .initial_points = 5, .cities = 7, .i = (int[]){5,2,11,4,1,6,0}, .j = (int[]){2,10,14,7,16,12,6}, .pop = (int[]){4,7,13,9,6,5,2} }
 };
 
 void put_city(board_t *board, int i, int j, int pop, int *index) {

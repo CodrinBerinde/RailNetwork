@@ -172,6 +172,7 @@ void play() {
   put_buffer(buf);
   while(opt != 6) {
     opt = listen_event();
+    printf("%d.\n", opt);
     if(opt >= 1 && opt <= 4) {
       show_menu(menu_row, buf);
       put_buffer(buf);

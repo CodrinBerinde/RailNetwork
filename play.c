@@ -104,6 +104,7 @@ int game(int difficulty, buf_t *buf) {
 
   int event = 0;
   while (event != 6) {
+    printf("I am here.\n");
     event = listen_event();
     if(event != 0) {
       switch(event) {

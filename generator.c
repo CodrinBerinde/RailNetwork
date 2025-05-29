@@ -64,7 +64,7 @@ int generate(board_t *board, int *cities) {
     }
   }
   for(int k = 0; k < boards[choice].cities; k++) {
-    board->data[boards[choice].i[k] * BOARD_WIDTH + boards[choice].j[k]] = boards[choice].pop;
+    board->data[boards[choice].i[k] * BOARD_WIDTH + boards[choice].j[k]] = boards[choice].pop[k];
     board->parents[boards[choice].i[k] * BOARD_WIDTH + boards[choice].j[k]] = index++;
   }
   

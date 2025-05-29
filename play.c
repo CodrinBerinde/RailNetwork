@@ -104,8 +104,9 @@ int game(int difficulty, buf_t *buf) {
 
   int event = 0;
   while (event != 6) {
-    printf("I am here.\n");
+    
     event = listen_event();
+    printf("event=%d.\n", event);
     if(event != 0) {
       switch(event) {
         case 0: break;
@@ -174,7 +175,7 @@ void play() {
   put_buffer(buf);
   while(opt != 6) {
     opt = listen_event();
-    
+    printf("In play, option is %d.\n", opt);
     if(opt == 1 || opt == 2) {
       if(menu_row < 3)
         menu_row++;

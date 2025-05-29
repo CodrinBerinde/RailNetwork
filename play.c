@@ -191,6 +191,8 @@ void play() {
         win = game(menu_row + 1, buf);
         if(win != -1)
           write_final_message(buf, win);
+        show_menu(menu_row, buf);
+        put_buffer(buf);
         opt = 0;
       }
     }

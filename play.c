@@ -172,12 +172,9 @@ void play() {
   put_buffer(buf);
   while(opt != 6) {
     opt = listen_event();
-    if(opt != 0)
-      printf("%d.\n", opt);
-    if(opt >= 1 && opt <= 4) {
-      show_menu(menu_row, buf);
-      put_buffer(buf);
-    }
+    //if(opt != 0)
+    //  printf("%d.\n", opt);
+    
     if(opt == 1 || opt == 2) {
       if(menu_row < 3)
         menu_row++;
@@ -185,6 +182,10 @@ void play() {
     if(opt == 3 || opt == 4) {
       if(menu_row > 0)
         menu_row--;
+    }
+    if(opt >= 1 && opt <= 4) {
+      show_menu(menu_row, buf);
+      put_buffer(buf);
     }
     if(opt == 5) {
       if(menu_row == 3)

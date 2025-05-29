@@ -173,8 +173,6 @@ void play() {
   put_buffer(buf);
   while(opt != 6) {
     opt = listen_event();
-    //if(opt != 0)
-    //  printf("%d.\n", opt);
     
     if(opt == 1 || opt == 2) {
       if(menu_row < 3)

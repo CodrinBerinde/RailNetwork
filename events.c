@@ -23,7 +23,7 @@
 
 extern void *spiled_base;
 uint32_t prev_knob_red, prev_knob_green, prev_knob_blue;
-int push_state;
+int push_state, push_state_blue;
 
 void init_reading_constants() {
   uint32_t knobs = *(uint32_t *)(spiled_base + SPILED_REG_KNOBS_8BIT_o);
@@ -31,6 +31,7 @@ void init_reading_constants() {
   prev_knob_green = (knobs >> 8) & 255;
   prev_knob_blue = knobs & 255;
   push_state = 0;
+  push_state_blue = 0;
 }
 
 int listen_event() {
@@ -72,8 +73,14 @@ int listen_event() {
     return res;
   }
 
-  if((knobs >> 24) & 1) { // the blue knob is pushed
-    return 6;
+  if((knobs >> 24) & 1) { //either the red or the green knobs is pushed
+    if(push_state_blue == 0) {
+      push_state_blue = 1;
+      return 6;
+    }
+  } else {
+    if(push_state_blue == 1)
+      push_state_blue = 0;
   }
 
   if((knobs >> 25)) { //either the red or the green knobs is pushed

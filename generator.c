@@ -43,7 +43,7 @@ predef_board_t boards[15] = {
 };
 
 
-int put_city(board_t *board, int i, int j, int pop, int *index) {
+void put_city(board_t *board, int i, int j, int pop, int *index) {
   if(board->parents[i * BOARD_WIDTH + j] == 0) {
     pop &= 15; //truncate population at 15
     board->data[i * BOARD_WIDTH + j] = pop;

@@ -73,7 +73,7 @@ int listen_event() {
     return res;
   }
 
-  if((knobs >> 24) & 1) { //either the red or the green knobs is pushed
+  if((knobs >> 24) & 1) { //the blue knob is pushed
     if(push_state_blue == 0) {
       push_state_blue = 1;
       return 6;

@@ -77,6 +77,7 @@ int listen_event() {
     return res;
   }
 
+  printf("%d.\n", (knobs >> 24));
   if((knobs >> 24) & 1) { //the blue knob is pushed
     if(push_state_blue == 0) {
       push_state_blue = 1;

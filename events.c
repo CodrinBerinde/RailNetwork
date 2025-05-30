@@ -35,15 +35,10 @@ void init_reading_constants() {
 }
 
 int listen_event() {
-  //if(push_state_blue == 1)
-  //  printf("BLUE PUSHED.\n");
-  //else
-  //  printf("BLUE NOT PUSHED.\n");
   int res = 0;
   uint32_t knobs = *(uint32_t *)(spiled_base + SPILED_REG_KNOBS_8BIT_o);
   uint32_t knob_red = (knobs >> 16) & 255;
   uint32_t knob_green = (knobs >> 8) & 255;
-  uint32_t knob_blue = knobs & 255;
 
   if(knob_red != prev_knob_red && knob_red % 4 == 0) {
     if(knob_red > prev_knob_red) {
@@ -77,7 +72,6 @@ int listen_event() {
     return res;
   }
 
-  //printf("%d.\n", (knobs >> 24));
   if((knobs >> 24) & 1) { //the blue knob is pushed
     if(push_state_blue == 0) {
       push_state_blue = 1;

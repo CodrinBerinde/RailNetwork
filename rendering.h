@@ -33,6 +33,7 @@
 #define RAIL_WIDTH 6
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
 #define CITY_R ((int)(0.5 * MIN(CW, CH)))
 #define CITY_r ((int)(0.35 * MIN(CW, CH)))
 
@@ -60,6 +61,9 @@
 #define MENU_HEIGHT (4 * MENU_ROW_HEIGHT)
 #define MENU_CORNER_J ((int)((PARLCD_WIDTH - MENU_WIDTH) / 2))
 #define MENU_CORNER_I ((int)((PARLCD_HEIGHT - MENU_HEIGHT) / 2))
+
+#define RMAX 31 //maximum value for red component in the uint16_t color representation
+#define GMAX 63 //maximum value for green component in the uint16_t color representation
 
 void put_buffer(buf_t *buf);
 

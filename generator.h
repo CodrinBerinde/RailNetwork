@@ -16,6 +16,8 @@
 
 #include "play.h"
 
+//function that generates a board to be played on; it returns through parameters the generated board, the number of cities, and through return value, the minimal
+//  number of initial points with which the game has soution
 int generate(board_t *board, int *cities);
 
 #endif

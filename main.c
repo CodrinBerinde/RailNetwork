@@ -36,11 +36,11 @@ int main(int argc, char *argv[])
     }
   }
 
-  printf("Hello world\n");
+  printf("Game started\n");
 
   play();
 
-  printf("Goodbye world\n");
+  printf("Game ended\n");
 
   /* Release the lock */
   serialize_unlock();

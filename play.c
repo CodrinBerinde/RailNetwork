@@ -46,6 +46,7 @@ int are_neighbours(cell_t *a, cell_t *b) {
 
 void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points, int *trees) {
   //a point is deduced if a new road is build (it must have not existed before)
+  printf("data is %d, link is %d.\n", board->data[i0 * BOARD_WIDTH + j0], link);
   if((board->data[i0 * BOARD_WIDTH + j0]) & (1 << (4 + link)) == 0)
     (*points)--;
   board->data[i0 * BOARD_WIDTH + j0] |= (1 << (4 + link));

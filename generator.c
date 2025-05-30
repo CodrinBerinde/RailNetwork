@@ -43,18 +43,18 @@ void put_city(board_t *board, int i, int j, int pop, int *index) {
 
 int generate(board_t *board, int *cities) {
   int choice = rand() % 5;
-  int index = 1;
+  int index = 0;
   
   //generate board
   for(int i = 0; i < BOARD_HEIGHT; i++) {
     for(int j = 0; j < BOARD_WIDTH; j++) {
       board->data[i * BOARD_WIDTH + j] = 0;
-      board->parents[i * BOARD_WIDTH + j] = 0;
+      board->parents[i * BOARD_WIDTH + j] = index++;
     }
   }
   for(int k = 0; k < boards[choice].cities; k++) {
     board->data[boards[choice].i[k] * BOARD_WIDTH + boards[choice].j[k]] = boards[choice].pop[k];
-    board->parents[boards[choice].i[k] * BOARD_WIDTH + boards[choice].j[k]] = index++;
+    //board->parents[boards[choice].i[k] * BOARD_WIDTH + boards[choice].j[k]] = index++;
   }
   
   (*cities) = boards[choice].cities;

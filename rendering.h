@@ -62,8 +62,8 @@
 #define MENU_CORNER_J ((int)((PARLCD_WIDTH - MENU_WIDTH) / 2))
 #define MENU_CORNER_I ((int)((PARLCD_HEIGHT - MENU_HEIGHT) / 2))
 
-#define RMAX 31 //maximum value for red component in the uint16_t color representation
-#define GMAX 63 //maximum value for green component in the uint16_t color representation
+#define RLEDMAX 255 //maximum value for red component for the RGB led
+#define GLEDMAX 255 //maximum value for green component for the RGB led
 
 void put_buffer(buf_t *buf);
 

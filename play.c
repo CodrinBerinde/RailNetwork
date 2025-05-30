@@ -45,14 +45,16 @@ int are_neighbours(cell_t *a, cell_t *b) {
 }
 
 void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points, int *trees) {
+  //a point is deduced if a new road is build (it must have not existed before)
+  if((board->data[i0 * BOARD_WIDTH + j0]) & (1 << (4 + link)) == 0)
+    (*points)--;
   board->data[i0 * BOARD_WIDTH + j0] |= (1 << (4 + link));
   board->data[i1 * BOARD_WIDTH + j1] |= (1 << (4 + (link + 2)%4));
   int parent0 = board->parents[i0 * BOARD_WIDTH + j0], parent1 = board->parents[i1 * BOARD_WIDTH + j1];
   int size0 = 0, size1 = 0, pop0 = 0, pop1 = 0;
-  if(parent0 != parent1)
-    (*points)--; //for the connection
-  if(parent0 != parent1 && parent0 != 0 && parent1 != 0) {
-    (*trees)--;
+  
+  //now we perform the unification
+  if(parent0 != parent1) {
     //we count the size of tree and population for parent0
     for(int i = 0; i < BOARD_HEIGHT; i++) {
       for(int j = 0; j < BOARD_WIDTH; j++) {
@@ -62,6 +64,7 @@ void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points
         }
       }
     }
+
     //we count the size of tree and population for parent1
     for(int i = 0; i < BOARD_HEIGHT; i++) {
       for(int j = 0; j < BOARD_WIDTH; j++) {
@@ -71,10 +74,16 @@ void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points
         }
       }
     }
-    if(size0 == 1)
-      (*points) += pop0;
-    if(size1 == 1)
-      (*points) += pop1;
+
+    //we check if we unified two non-empty (inhabited) and still different subnetworks
+    if(size0 > 0 && size1 > 0) {
+      if(size0 == 1)
+        (*points) += pop0;
+      if(size1 == 1)
+        (*points) += pop1;
+      (*trees)--;
+    }
+
     //we write all cells with parent1 as parent0
     for(int i = 0; i < BOARD_HEIGHT; i++) {
       for(int j = 0; j < BOARD_WIDTH; j++) {
@@ -83,10 +92,6 @@ void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points
         }
       }
     }
-  } else if(parent1 == 0 && parent0 != 0) {
-    board->parents[i1 * BOARD_WIDTH + j1] = parent0;
-  } else if(parent1 != 0 && parent0 == 0) {
-    board->parents[i0 * BOARD_WIDTH + j0] = parent1;
   }
 }
 

@@ -103,7 +103,7 @@ int game(int difficulty, buf_t *buf) {
   board_t board = {board_data, parent_vector};
   cell_t selected = {0, 0}, under_constr = {-1, 0};
 
-  int points = generate(&board, &trees) + 3 - difficulty;
+  int points = generate(&board, &trees) + 6 - 2 * difficulty;
   refresh_board(&board, buf, &selected, &under_constr, points);
   put_buffer(buf);
 
@@ -203,6 +203,9 @@ void play() {
         opt = 0;
       }
     }
+    if(opt == 6) {
+      clear_display_data(buf);
+    }
   }
-  clear_mem_buf();
+  clear_mem_buffer(buf);
 }

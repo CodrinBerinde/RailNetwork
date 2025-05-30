@@ -27,7 +27,7 @@ typedef struct PREDEF_BOARD {
 predef_board_t boards[5] = {
     { .initial_points = 6, .cities = 4, .i = (int[]){1, 7, 8, 10}, .j = (int[]){16, 7, 17, 4}, .pop = (int[]){4, 3, 5, 5} },
     { .initial_points = 8, .cities = 5, .i = (int[]){2,3,4,8,11}, .j = (int[]){12,8,5,4,17}, .pop = (int[]){13,1,2,8,10} },
-    { .initial_points = 5, .cities = 6, .i = (int[]){1,2,3,9,11,11}, .j = (int[]){4,14,1,13,0,9}, .pop = (int[]){1,9,5,6,1,2} },
+    { .initial_points = 5, .cities = 6, .i = (int[]){1,2,3,9,11,11}, .j = (int[]){4,14,1,13,0,9}, .pop = (int[]){1,9,5,6,8,2} },
     { .initial_points = 4, .cities = 5, .i = (int[]){1,7,8,10,11}, .j = (int[]){10,16,8,0,16}, .pop = (int[]){11,6,4,1,3} },
     { .initial_points = 3, .cities = 6, .i = (int[]){0,3,4,5,8,9}, .j = (int[]){13,4,2,12,4,7}, .pop = (int[]){9,3,2,3,1,4} }
 };

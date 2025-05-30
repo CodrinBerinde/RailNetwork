@@ -17,27 +17,14 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <stdint.h>
-#include <time.h>
-#include <unistd.h>
-#include <string.h>
 
-#include "mzapo_phys.h"
-#include "mzapo_regs.h"
 #include "serialize_lock.h"
-#include "mzapo_parlcd.h"
-#include "font_types.h"
 
 #include "play.h"
-#include "events.h"
-#include "rendering.h"
-#include "generator.h"
 
 int main(int argc, char *argv[])
 {
-
   /* Serialize execution of applications */
-
   /* Try to acquire lock the first */
   if (serialize_lock(1) <= 0) {
     printf("System is occupied\n");
@@ -49,11 +36,11 @@ int main(int argc, char *argv[])
     }
   }
 
-  printf("Hello world\n");
+  printf("Game started\n");
 
   play();
 
-  printf("Goodbye world\n");
+  printf("Game ended\n");
 
   /* Release the lock */
   serialize_unlock();

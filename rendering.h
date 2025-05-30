@@ -93,4 +93,6 @@ int string_width(font_descriptor_t *font, char *str, int size);
 
 void str_buf(buf_t *buf, int i, int j, font_descriptor_t *font, char *str, int size, uint16_t color);
 
+void clear_display_data(buf_t *buf);
+
 #endif

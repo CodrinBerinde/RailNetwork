@@ -46,10 +46,8 @@ int are_neighbours(cell_t *a, cell_t *b) {
 
 void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points, int *trees) {
   //a point is deduced if a new road is build (it must have not existed before)
-  printf("data is %d, link is %d, result is %d.\n", board->data[i0 * BOARD_WIDTH + j0], link, (board->data[i0 * BOARD_WIDTH + j0]) & (1 << (4 + link)));
   if(((board->data[i0 * BOARD_WIDTH + j0]) & (1 << (4 + link))) == 0)
     (*points)--;
-  printf("points are now %d.\n", *points);
   board->data[i0 * BOARD_WIDTH + j0] |= (1 << (4 + link));
   board->data[i1 * BOARD_WIDTH + j1] |= (1 << (4 + (link + 2)%4));
   int parent0 = board->parents[i0 * BOARD_WIDTH + j0], parent1 = board->parents[i1 * BOARD_WIDTH + j1];
@@ -151,9 +149,9 @@ int game(int difficulty, buf_t *buf) {
         points = 0;
       refresh_board(&board, buf, &selected, &under_constr, points);
       if(event == 6 || trees == 1 || points == 0)
-        clear_buf(buf, 0);
-      
-      put_buffer(buf);
+        clear_display_data(buf);
+      else
+        put_buffer(buf);
       if(trees == 1) {
         return 0;
       }
@@ -206,7 +204,5 @@ void play() {
       }
     }
   }
-  clear_buf(buf, 0);
-  put_buffer(buf);
-  clear_mem_buffer(buf);
+  clear_mem_buf();
 }

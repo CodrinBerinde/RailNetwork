@@ -302,10 +302,17 @@ void refresh_board(board_t *board, buf_t *buf, cell_t *selected, cell_t *under_c
   *(uint32_t *)(spiled_base + SPILED_REG_LED_LINE_o) = led_display;
 
   //show the status on the RGB led
-  int red_component = RLEDMAX * MAX(0, (8 - points)) / 8;
-  int green_component = GLEDMAX * MIN(8, points) / 8;
+  int red_component = RLEDMAX * MAX(0, (16 - points)) / 16;
+  int green_component = GLEDMAX * MIN(16, points) / 16;
   int color_rgb_led = (red_component << 16) | (green_component << 8);
   *(uint32_t *)(spiled_base + SPILED_REG_LED_RGB1_o) = color_rgb_led;
+}
+
+void clear_display_data(buf_t *buf) {
+  clear_buf(buf, 0);
+  put_buffer(buf);
+  *(uint32_t *)(spiled_base + SPILED_REG_LED_LINE_o) = 0;
+  *(uint32_t *)(spiled_base + SPILED_REG_LED_RGB1_o) = 0;
 }
 
 void clear_mem_buffer(buf_t *buf) {

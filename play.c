@@ -49,6 +49,7 @@ void unify(board_t *board, int i0, int j0, int i1, int j1, int link, int *points
   printf("data is %d, link is %d.\n", board->data[i0 * BOARD_WIDTH + j0], link);
   if((board->data[i0 * BOARD_WIDTH + j0]) & (1 << (4 + link)) == 0)
     (*points)--;
+  printf("points are now %d.\n", *points);
   board->data[i0 * BOARD_WIDTH + j0] |= (1 << (4 + link));
   board->data[i1 * BOARD_WIDTH + j1] |= (1 << (4 + (link + 2)%4));
   int parent0 = board->parents[i0 * BOARD_WIDTH + j0], parent1 = board->parents[i1 * BOARD_WIDTH + j1];

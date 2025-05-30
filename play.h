@@ -14,6 +14,8 @@
 #ifndef PLAY_H
 #define PLAY_H
 
+#include <stdlib.h>
+
 #define BOARD_HEIGHT 12 // 12 rows of cells
 #define BOARD_WIDTH 18 // 18 columns of cells
 

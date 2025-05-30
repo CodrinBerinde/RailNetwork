@@ -16,8 +16,6 @@
 
 #include "play.h"
 #include "events.h"
-#include "rendering.h"
-#include "generator.h"
 #include "mzapo_phys.h"
 #include "mzapo_regs.h"
 

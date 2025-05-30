@@ -18,6 +18,4 @@
 
 int generate(board_t *board, int *cities);
 
-void put_city(board_t *board, int i, int j, int pop, int *index);
-
 #endif

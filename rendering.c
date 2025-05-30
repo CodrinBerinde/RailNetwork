@@ -12,16 +12,12 @@
  *******************************************************************/
 
 #include <stdlib.h>
-#include <stdio.h>
 #include <time.h>
 
 #include "play.h"
-#include "events.h"
 #include "rendering.h"
-#include "generator.h"
 #include "mzapo_phys.h"
 #include "mzapo_regs.h"
-#include "serialize_lock.h"
 #include "mzapo_parlcd.h"
 #include "font_types.h"
 

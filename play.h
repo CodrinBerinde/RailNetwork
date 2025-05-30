@@ -14,11 +14,6 @@
 #ifndef PLAY_H
 #define PLAY_H
 
-#include "mzapo_phys.h"
-#include "mzapo_regs.h"
-#include "serialize_lock.h"
-#include "mzapo_parlcd.h"
-
 #define BOARD_HEIGHT 12 // 12 rows of cells
 #define BOARD_WIDTH 18 // 18 columns of cells
 

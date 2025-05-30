@@ -15,8 +15,6 @@
 #include <time.h>
 
 #include "play.h"
-#include "events.h"
-#include "rendering.h"
 #include "generator.h"
 
 typedef struct PREDEF_BOARD {
@@ -32,15 +30,6 @@ predef_board_t boards[5] = {
     { .initial_points = 3, .cities = 6, .i = (int[]){0,3,4,5,8,9}, .j = (int[]){13,4,2,12,4,7}, .pop = (int[]){9,3,2,3,1,4} }
 };
 
-void put_city(board_t *board, int i, int j, int pop, int *index) {
-  if(board->parents[i * BOARD_WIDTH + j] == 0) {
-    pop &= 15; //truncate population at 15
-    board->data[i * BOARD_WIDTH + j] = pop;
-    (*index)++;
-    board->parents[i * BOARD_WIDTH + j] = (*index);
-  }
-}
-
 int generate(board_t *board, int *cities) {
   int choice = rand() % 5;
   int index = 0;
@@ -54,7 +43,6 @@ int generate(board_t *board, int *cities) {
   }
   for(int k = 0; k < boards[choice].cities; k++) {
     board->data[boards[choice].i[k] * BOARD_WIDTH + boards[choice].j[k]] = boards[choice].pop[k];
-    //board->parents[boards[choice].i[k] * BOARD_WIDTH + boards[choice].j[k]] = index++;
   }
   
   (*cities) = boards[choice].cities;

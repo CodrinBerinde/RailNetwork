@@ -17,7 +17,6 @@
 #include <stdlib.h>
 #include "mzapo_phys.h"
 #include "mzapo_regs.h"
-#include "serialize_lock.h"
 #include "mzapo_parlcd.h"
 #include "font_types.h"
 #include "play.h"

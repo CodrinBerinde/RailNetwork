@@ -3,9 +3,7 @@ This project was developed by Codrin Berinde, student at the Technical Universit
   as part of the semestrial assesment for the Computer Architectures course,
   offered by the Faculty of Electrical Engineering.
 
-special thanks to the coordinating professor, Pavel Pisa.
-
-The project elaborated documentation can be found at https://www.overleaf.com/read/nmpbkkxnfnvz#c007f4.
+Special thanks to the coordinating professor, Pavel Píša.
 
 As of 1st of June 2025, the project is incomplete, the generation of the boards is just a random
   selection between some known, stored boards; the algorithm described in the documentation

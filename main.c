@@ -2,7 +2,7 @@
   Project main function template for MicroZed based MZ_APO board
   designed by Petr Porazil at PiKRON
 
-  change_me.c      - main file
+  main.c      - main file
 
   Berinde Codrin
   berinde.gh.codrin@student.utcluj.ro

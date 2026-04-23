@@ -6,5 +6,6 @@ This project was developed by Codrin Berinde, student at the Technical Universit
 Special thanks to the coordinating professor, Pavel Píša.
 
 As of 1st of June 2025, the project is incomplete, the generation of the boards is just a random
-  selection between some known, stored boards; the algorithm described in the documentation
-  is not yet implemented.
+  selection between some known, stored boards; otherwise it works perfectly.
+
+See the available documentation.
